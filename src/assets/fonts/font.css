@@ -1,0 +1,12 @@
+@font-face {
+  font-family: MFLiHei_Noncommercial-Regular;
+  src: url('./MFLiHei_Noncommercial-Regular.otf');
+}
+@font-face {
+  font-family: SourceHanSansCN-Heavy;
+  src: url('./SourceHanSansCN-Heavy.otf');
+}
+@font-face {
+  font-family: SourceHanSansCN-Bold;
+  src: url('./SourceHanSansCN-Bold.otf');
+}

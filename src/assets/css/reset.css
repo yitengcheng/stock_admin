@@ -1,0 +1,58 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  padding: 0;
+  margin: 0;
+}
+.baseContainer {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  padding: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.baseContainerHeight {
+  height: 92.6vh;
+}
+.baseHeight {
+  height: 88.6vh;
+}
+.baseBorder {
+  background-color: #fff;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 98vw;
+  margin-top: 1vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  height: 87.6vh;
+}
+.decoration {
+  border-radius: 3px 0px 0px 3px;
+  width: 5px;
+  height: 20px;
+  border: 1px solid #0575f3;
+  background-color: #0575f3;
+  margin-right: 10px;
+}
