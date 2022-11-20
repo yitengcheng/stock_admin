@@ -18,6 +18,7 @@ import WuPinChuRu from "@/pages/StatisticalReport/WuPinChuRu";
 import WuPinFenLei from "@/pages/StatisticalReport/WuPinFenLei";
 import ZuHeChaXun from "@/pages/StatisticalReport/ZuHeChaXun";
 import DepartmentManagement from "@/pages/DepartmentManagement";
+import Employess from "@/pages/Employess";
 import { API_URL } from "../constant";
 
 export const routers = [
@@ -41,6 +42,7 @@ export const routers = [
   { key: "item-5-8", path: "wuPinFenLei", element: WuPinFenLei, label: "物品分类汇总表" },
   { key: "item-5-9", path: "zuHeChaXun", element: ZuHeChaXun, label: "组合查询统计表" },
   { key: "item-6", path: "departmentManagement", element: DepartmentManagement, label: "部门管理" },
+  { key: "item-7", path: "employess", element: Employess, label: "员工管理" },
 ];
 
 export const menus = [
