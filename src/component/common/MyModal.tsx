@@ -1,7 +1,6 @@
-import { Modal } from "antd";
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import useStateRef from "react-usestateref";
-import styles from "./index.module.less";
+import { Modal } from 'antd';
+import React, { forwardRef, useImperativeHandle } from 'react';
+import useStateRef from 'react-usestateref';
 
 const MyModal = (props: any, ref: any) => {
   const { title, children } = props;

@@ -1,3 +1,3 @@
 export default {
-  login: "/app/login", // 登录
+  login: '/app/login', // 登录
 };

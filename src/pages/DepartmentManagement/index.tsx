@@ -1,53 +1,52 @@
-import { Button, Modal, Result, Space, Typography } from "antd";
-import React, { useEffect, useRef } from "react";
-import useStateRef from "react-usestateref";
-import styles from "./index.module.less";
-import * as echarts from "echarts";
-import { post } from "../../axios";
-import apis from "../../apis";
-import MyModal from "../../component/common/MyModal";
-import DepartDetail from "../../component/popupComponent/DepartDetail";
-import DelDepartDetail from "../../component/popupComponent/DelDepartDetail";
+import { Button, Space, Typography } from 'antd';
+import React, { useEffect, useRef } from 'react';
+import useStateRef from 'react-usestateref';
+import styles from './index.module.less';
+import * as echarts from 'echarts';
+import { post } from '../../axios';
+import apis from '../../apis';
+import MyModal from '../../component/common/MyModal';
+import DepartDetail from '../../component/popupComponent/DepartDetail';
+import DelDepartDetail from '../../component/popupComponent/DelDepartDetail';
 
 export default (props: any) => {
-  const [isModalOpen, setIsModalOpen] = useStateRef(false);
-  const [parentId, setParentId, currentParentIdRef] = useStateRef("");
-  const [departmentName, setDepartmentName, currentDepartmentNameRef] = useStateRef("");
-  const [departmentId, setDepartmentId, currentDepartmentIdRef] = useStateRef("");
+  const [parentId, setParentId, currentParentIdRef] = useStateRef('');
+  const [departmentName, setDepartmentName, currentDepartmentNameRef] = useStateRef('');
+  const [departmentId, setDepartmentId, currentDepartmentIdRef] = useStateRef('');
   const modalRef = useRef(0);
   const delModalRef = useRef(0);
   useEffect(() => {
     departmentTree();
   }, []);
   const departmentTree = async () => {
-    const myChart = echarts.init(document.getElementById("departmentTree"));
+    const myChart = echarts.init(document.getElementById('departmentTree'));
     const data = await post(apis.departsTree);
     myChart.setOption({
       series: [
         {
-          type: "tree",
+          type: 'tree',
           data: [data],
-          left: "2%",
-          right: "2%",
-          top: "8%",
-          bottom: "20%",
+          left: '2%',
+          right: '2%',
+          top: '8%',
+          bottom: '20%',
           symbolSize: 12,
-          orient: "vertical",
+          orient: 'vertical',
           label: {
             fontSize: 14,
-            position: "top",
-            verticalAlign: "middle",
-            align: "middle",
+            position: 'top',
+            verticalAlign: 'middle',
+            align: 'middle',
           },
           leaves: {
             label: {
-              position: "bottom",
-              verticalAlign: "middle",
-              align: "middle",
+              position: 'bottom',
+              verticalAlign: 'middle',
+              align: 'middle',
             },
           },
           emphasis: {
-            focus: "descendant",
+            focus: 'descendant',
           },
           expandAndCollapse: false,
           initialTreeDepth: 4,
@@ -56,7 +55,7 @@ export default (props: any) => {
         },
       ],
     });
-    myChart.on("click", (params) => {
+    myChart.on('click', (params) => {
       setDepartmentName(params?.data?.name);
       setParentId(params?.data?.parentId);
       setDepartmentId(params?.data?.id);
@@ -71,7 +70,7 @@ export default (props: any) => {
   };
 
   return (
-    <div className={["baseContainer", "baseBorder"].join(" ")}>
+    <div className={['baseContainer', 'baseBorder'].join(' ')}>
       <div className={styles.titleContainer}>
         <Typography.Title level={3}>部门管理</Typography.Title>
         <Space>
@@ -95,7 +94,7 @@ export default (props: any) => {
         </Space>
       </div>
       <div className={styles.treeContainer}>
-        <div id="departmentTree" className={styles.tree}></div>
+        <div id="departmentTree" className={styles.tree} />
       </div>
       <MyModal ref={modalRef} title="部门">
         <DepartDetail
@@ -106,9 +105,9 @@ export default (props: any) => {
             departmentTree();
           }}
           closeModal={() => {
-            setDepartmentId("");
-            setDepartmentName("");
-            setParentId("");
+            setDepartmentId('');
+            setDepartmentName('');
+            setParentId('');
             modalRef.current.closeModal();
           }}
         />

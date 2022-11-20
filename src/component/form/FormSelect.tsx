@@ -1,6 +1,6 @@
-import { Form, Select } from "antd";
-import React from "react";
-import { randomKey } from "../../utils";
+import { Form, Select } from 'antd';
+import React from 'react';
+import { randomKey } from '../../utils';
 const { Option } = Select;
 
 export default (props: any) => {

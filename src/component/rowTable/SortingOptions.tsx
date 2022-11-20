@@ -1,33 +1,42 @@
-import { List, Typography } from "antd";
-import React from "react";
-import useStateRef from "react-usestateref";
-import styles from "./index.module.less";
+import { Tree, Typography } from 'antd';
+import React, { useEffect } from 'react';
+import useStateRef from 'react-usestateref';
+import apis from '../../apis';
+import { post } from '../../axios';
+import styles from './index.module.less';
 
 export default (props: any) => {
-  const { data, level = 5, title, bordered = false, onClick } = props;
+  const { level = 5, title, onClick } = props;
+  const [treeData, setTreeData] = useStateRef([]);
+  const [expande, setExpande, expandeRef] = useStateRef('');
 
-  const clickItem = (id) => {
-    onClick && onClick(id);
+  useEffect(async () => {
+    try {
+      const res = await post(apis.departsTree);
+      setTreeData(res?.children);
+      console.log(res?.children?.[0]?.id);
+
+      setExpande(res?.children?.[0]?.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const clickItem = (select) => {
+    onClick && onClick(select[0]);
   };
 
   return (
     <div className={styles.SortingOptionsContainer}>
-      <List
-        style={{ border: "none" }}
-        header={<Typography.Title level={level}>{title}</Typography.Title>}
-        footer={null}
-        pagination={null}
-        bordered
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item
-            onClick={() => {
-              clickItem(item.id);
-            }}
-          >
-            <Typography.Text>{item.text}</Typography.Text>
-          </List.Item>
-        )}
+      <Typography.Title level={level} className={styles.titleContainer}>
+        {title}
+      </Typography.Title>
+      <Tree
+        onSelect={clickItem}
+        treeData={treeData}
+        expandedKeys={[expandeRef.current]}
+        showLine
+        fieldNames={{ title: 'name', key: 'id', children: 'children' }}
       />
     </div>
   );

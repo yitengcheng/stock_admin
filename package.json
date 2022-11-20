@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.7.0",
-    "@iceworks/spec": "^1.6.0",
     "antd": "5.x",
     "axios": "0.26.1",
     "dayjs": "^1.11.3",
@@ -32,10 +31,11 @@
     "@types/react": "17.0.33",
     "@types/react-dom": "17.0.10",
     "@vitejs/plugin-react": "1.0.7",
-    "eslint": "^8.0.0",
+    "eslint": "^7.22.0",
     "prettier": "^2.1.0",
-    "stylelint": "^14.0.0",
+    "stylelint": "^13.7.2",
     "typescript": "4.5.4",
-    "vite": "2.9.0"
+    "vite": "2.9.0",
+    "@iceworks/spec": "^1.0.0"
   }
 }

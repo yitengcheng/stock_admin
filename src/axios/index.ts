@@ -1,6 +1,5 @@
 import { message } from 'antd';
 import axios from 'axios';
-import { API_URL } from '../constant';
 import { getStorage } from '../localStorage';
 
 export const post = async (url: string, params: any) => {

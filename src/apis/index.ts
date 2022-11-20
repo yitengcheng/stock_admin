@@ -1,6 +1,6 @@
-import user from "./user";
-import department from "./department";
-import texus from "./texus";
+import user from './user';
+import department from './department';
+import texus from './texus';
 
 export default {
   ...user,

@@ -1,13 +1,13 @@
-import { Button, message, Space, Table } from "antd";
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
-import { post } from "../../axios";
-import { randomKey } from "../../utils";
-import styles from "./index.module.less";
-import lodash from "lodash";
-import { DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import { Button, message, Space, Table } from 'antd';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { post } from '../../axios';
+import { randomKey } from '../../utils';
+import styles from './index.module.less';
+import lodash from 'lodash';
+import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 const List = (props: any, ref: any) => {
-  const { width, height, columns, onClickRow, url, onAddBtn, onDelBtn, buttonList, addBtnText, name = "" } = props;
+  const { width, height, columns, onClickRow, url, onAddBtn, onDelBtn, name = '' } = props;
   const [pageNum, setPageNum] = useState(1);
   const [total, setTotal] = useState(undefined);
   const [dataSource, setDataSource] = useState();
@@ -31,26 +31,27 @@ const List = (props: any, ref: any) => {
       columns?.map((column) => {
         resC?.push({
           width: column?.title.length * 20 + 20,
-          align: "center",
+          align: 'center',
           ellipsis: true,
           ...column,
         });
       });
       setDataColumns(resC);
     }
-    post(url, { pageNum, pageSize: 10 }).then((res) => {
-      const { list } = res;
-      setTotal(res?.total);
-      let result = [];
-      list?.map((item) => {
-        result.push({ key: item._id ?? randomKey(), ...item });
+    url &&
+      post(url, { pageNum, pageSize: 10 }).then((res) => {
+        const { list } = res;
+        setTotal(res?.total);
+        let result = [];
+        list?.map((item) => {
+          result.push({ key: item._id ?? randomKey(), ...item });
+        });
+        setDataSource(result);
       });
-      setDataSource(result);
-    });
   };
   const deleteData = () => {
     if (selectedRowKeys?.length === 0) {
-      message.error("请选择待删除数据");
+      message.error('请选择待删除数据');
       return;
     }
     onDelBtn && onDelBtn(selectedRowKeys);
@@ -59,7 +60,7 @@ const List = (props: any, ref: any) => {
     <div className={styles.tableContainer}>
       <div className={styles.tableTitleBox}>
         <div className={styles.tableTitleTextBox}>
-          <div className="decoration"></div>
+          <div className="decoration" />
           <div className={styles.tableTitleText}>{name}</div>
         </div>
         <div>
@@ -98,7 +99,7 @@ const List = (props: any, ref: any) => {
         }}
         rowSelection={{
           onChange: (selectedRowKeys, selectedRows) => {
-            setSelectedRowKeys(lodash.map(selectedRows, "_id"));
+            setSelectedRowKeys(lodash.map(selectedRows, '_id'));
           },
         }}
       />

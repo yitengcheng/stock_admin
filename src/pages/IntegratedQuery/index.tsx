@@ -1,19 +1,18 @@
-import { Form, Row, Space } from "antd";
-import React from "react";
-import useStateRef from "react-usestateref";
-import FormDateRangePicker from "../../component/form/FormDateRangePicker";
-import FormInput from "../../component/form/FormInput";
-import FormRadioGroup from "../../component/form/FormRadioGroup";
-import FormSelect from "../../component/form/FormSelect";
-import MyTable from "../../component/columnTable/MyTable";
-import TableScreen from "../../component/columnTable/TableScreen";
-import { formCol } from "../../utils";
-import styles from "./index.module.less";
+import { Form, Row, Space } from 'antd';
+import React from 'react';
+import useStateRef from 'react-usestateref';
+import FormDateRangePicker from '../../component/form/FormDateRangePicker';
+import FormInput from '../../component/form/FormInput';
+import FormRadioGroup from '../../component/form/FormRadioGroup';
+import FormSelect from '../../component/form/FormSelect';
+import MyTable from '../../component/columnTable/MyTable';
+import TableScreen from '../../component/columnTable/TableScreen';
+import styles from './index.module.less';
 
 export default (props: any) => {
   const [screenForm] = Form.useForm();
   return (
-    <div className={["baseContainer", "baseHeight"].join(" ")}>
+    <div className={['baseContainer', 'baseHeight'].join(' ')}>
       <TableScreen label="出入库查询">
         <Form form={screenForm} scrollToFirstError labelWrap>
           <Row>
@@ -22,8 +21,8 @@ export default (props: any) => {
               required={false}
               name="itemType"
               options={[
-                { label: "出库查询", value: 1 },
-                { label: "入库查询", value: 2 },
+                { label: '出库查询', value: 1 },
+                { label: '入库查询', value: 2 },
               ]}
             />
           </Row>
@@ -51,14 +50,14 @@ export default (props: any) => {
         onAddBtn={() => {}}
         onDelBtn={() => {}}
         columns={[
-          { title: "登账状态" },
-          { title: "单据编号" },
-          { title: "出库时间" },
-          { title: "出库类型" },
-          { title: "领用部门" },
-          { title: "领用人" },
-          { title: "制单人" },
-          { title: "备注" },
+          { title: '登账状态' },
+          { title: '单据编号' },
+          { title: '出库时间' },
+          { title: '出库类型' },
+          { title: '领用部门' },
+          { title: '领用人' },
+          { title: '制单人' },
+          { title: '备注' },
         ]}
       />
     </div>

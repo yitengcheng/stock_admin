@@ -1,6 +1,6 @@
-import { Form, Radio } from "antd";
-import React from "react";
-import { randomKey } from "../../utils";
+import { Form, Radio } from 'antd';
+import React from 'react';
+import { randomKey } from '../../utils';
 const { Group } = Radio;
 
 export default (props: any) => {
@@ -10,8 +10,8 @@ export default (props: any) => {
     required = true,
     rule = [],
     options = [
-      { value: false, label: "否" },
-      { value: true, label: "是" },
+      { value: false, label: '否' },
+      { value: true, label: '是' },
     ],
     mode,
   } = props;

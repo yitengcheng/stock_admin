@@ -1,12 +1,10 @@
-import { Button, Form, Result, Space } from "antd";
-import React, { useEffect } from "react";
-import useStateRef from "react-usestateref";
-import apis from "../../apis";
-import { post } from "../../axios";
-import FormInput from "../form/FormInput";
-import FormRadioGroup from "../form/FormRadioGroup";
-import FormSelect from "../form/FormSelect";
-import styles from "./index.module.less";
+import { Button, Form, Space } from 'antd';
+import React, { useEffect } from 'react';
+import useStateRef from 'react-usestateref';
+import apis from '../../apis';
+import { post } from '../../axios';
+import FormRadioGroup from '../form/FormRadioGroup';
+import FormSelect from '../form/FormSelect';
 
 export default (props: any) => {
   const { closeModal, refresh } = props;

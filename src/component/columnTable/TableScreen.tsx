@@ -1,6 +1,5 @@
 import { Button, Space } from 'antd';
-import React, { Children } from 'react';
-import useStateRef from 'react-usestateref';
+import React from 'react';
 import { randomKey } from '../../utils';
 import styles from './index.module.less';
 
@@ -10,7 +9,7 @@ export default (props: any) => {
     <div className={styles.screenContainer}>
       <div className={styles.screenTitleBox}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <div className="decoration"></div>
+          <div className="decoration" />
           <div className={styles.screenTitleText}>{label}</div>
         </div>
         <Space>
@@ -27,7 +26,17 @@ export default (props: any) => {
               name,
             } = button;
             return (
-              <Button type disabled danger ghost icon shape size onClick={() => onClick()} key={randomKey()}>
+              <Button
+                type={type}
+                disabled={disabled}
+                danger={danger}
+                ghost={ghost}
+                icon={icon}
+                shape={shape}
+                size={size}
+                onClick={() => onClick()}
+                key={randomKey()}
+              >
                 {name}
               </Button>
             );

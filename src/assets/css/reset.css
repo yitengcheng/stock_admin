@@ -40,7 +40,7 @@ td {
 }
 .baseBorder {
   background-color: #fff;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   width: 98vw;
   margin-top: 1vh;
@@ -49,7 +49,7 @@ td {
   height: 87.6vh;
 }
 .decoration {
-  border-radius: 3px 0px 0px 3px;
+  border-radius: 3px 0 0 3px;
   width: 5px;
   height: 20px;
   border: 1px solid #0575f3;
