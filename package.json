@@ -14,7 +14,7 @@
   "dependencies": {
     "@ant-design/icons": "4.7.0",
     "@iceworks/spec": "^1.6.0",
-    "antd": "^4.21.5",
+    "antd": "5.x",
     "axios": "0.26.1",
     "dayjs": "^1.11.3",
     "echarts": "^5.3.3",

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Form } from 'antd';
-import { DatePicker } from '../antdComponents';
+import React from "react";
+import { Form, DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
 export default (props: any) => {

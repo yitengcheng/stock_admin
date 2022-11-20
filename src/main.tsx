@@ -1,17 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.less';
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale/zh_CN';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from '@/pages/Login';
-import Home from '@/pages/Home';
-import { routers } from './routers';
-import { RecoilRoot } from 'recoil';
-import '@/assets/css/reset.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/reset.css";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/locale/zh_CN";
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "@/pages/Login";
+import Home from "@/pages/Home";
+import { routers } from "./routers";
+import { RecoilRoot } from "recoil";
+import "@/assets/css/reset.css";
+
+dayjs.locale("zh-cn");
 
 const validateMessages = {
-  required: '${label} 是必选字段',
+  required: "${label} 是必选字段",
 };
 
 ReactDOM.render(
@@ -29,5 +33,5 @@ ReactDOM.render(
       </BrowserRouter>
     </ConfigProvider>
   </RecoilRoot>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

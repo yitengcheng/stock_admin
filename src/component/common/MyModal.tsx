@@ -22,7 +22,7 @@ const MyModal = (props: any, ref: any) => {
     setIsModalOpen(false);
   };
   return (
-    <Modal title={title} visible={isModalOpen} footer={null} onCancel={closeModal}>
+    <Modal title={title} open={isModalOpen} footer={null} onCancel={closeModal}>
       {children}
     </Modal>
   );

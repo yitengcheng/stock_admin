@@ -1,4 +1,4 @@
-import { Button, Card, Col, Descriptions, Divider, PageHeader, Row, Space, Statistic } from "antd";
+import { Button, Card, Col, Descriptions, Divider, PageHeader, Row, Space, Statistic, Calendar } from "antd";
 import React, { useState } from "react";
 import styles from "./index.module.less";
 import * as echarts from "echarts";
@@ -6,7 +6,6 @@ import IconFont from "../../component/IconFont";
 import { randomColor } from "../../utils";
 import apis from "../../apis";
 import lodash from "lodash";
-import { Calendar } from "../../component/antdComponents";
 import { PlusOutlined } from "@ant-design/icons";
 import MenuGird from "./MenuGird";
 
