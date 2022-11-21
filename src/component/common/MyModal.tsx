@@ -3,7 +3,7 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 import useStateRef from 'react-usestateref';
 
 const MyModal = (props: any, ref: any) => {
-  const { title, children } = props;
+  const { title, children, reset } = props;
   const [isModalOpen, setIsModalOpen] = useStateRef(false);
 
   useImperativeHandle(ref, () => ({
@@ -18,6 +18,7 @@ const MyModal = (props: any, ref: any) => {
     setIsModalOpen(true);
   };
   const closeModal = () => {
+    reset && reset();
     setIsModalOpen(false);
   };
   return (
