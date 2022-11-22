@@ -11,7 +11,7 @@ export default () => {
     { color: '#E2EBFC', icon: '/src/assets/images/option.png', title: '部门管理', path: 'departmentManagement' },
     { color: '#FFF5E6', icon: '/src/assets/images/analyze.png', title: '统计报表' },
     { color: '#DFF8FB', icon: '/src/assets/images/itemClassify.png', title: '物品分类' },
-    { color: '#E6F7E9', icon: '/src/assets/images/supplier.png', title: '供应商' },
+    { color: '#E6F7E9', icon: '/src/assets/images/supplier.png', title: '供应商', path: 'supplier' },
     { color: '#FFECEC', icon: '/src/assets/images/recipient.png', title: '员工管理', path: 'employee' },
     { color: '#E2EBFC', icon: '/src/assets/images/putinStorage.png', title: '入库单' },
     { color: '#E2EBFC', icon: '/src/assets/images/list.png', title: '物品清单' },

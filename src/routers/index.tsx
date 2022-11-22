@@ -19,6 +19,7 @@ import WuPinFenLei from '@/pages/StatisticalReport/WuPinFenLei';
 import ZuHeChaXun from '@/pages/StatisticalReport/ZuHeChaXun';
 import DepartmentManagement from '@/pages/DepartmentManagement';
 import Employee from '@/pages/Employee';
+import Supplier from '@/pages/Supplier';
 
 export const routers = [
   { key: 'item-0', path: '', element: Home, label: '工作台' },
@@ -42,6 +43,7 @@ export const routers = [
   { key: 'item-5-9', path: 'zuHeChaXun', element: ZuHeChaXun, label: '组合查询统计表' },
   { key: 'item-6', path: 'departmentManagement', element: DepartmentManagement, label: '部门管理' },
   { key: 'item-7', path: 'employee', element: Employee, label: '员工管理' },
+  { key: 'item-8', path: 'supplier', element: Supplier, label: '供应商管理' },
 ];
 
 export const menus = [

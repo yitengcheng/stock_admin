@@ -7,7 +7,7 @@ import lodash from 'lodash';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 const List = (props: any, ref: any) => {
-  const { width, height, columns, onClickRow, url, onAddBtn, onDelBtn, name = '', params } = props;
+  const { width, height, columns, onClickRow, url, onAddBtn, onDelBtn, name = '', params, keyword } = props;
   const [pageNum, setPageNum] = useState(1);
   const [total, setTotal] = useState(undefined);
   const [dataSource, setDataSource] = useState();
@@ -16,7 +16,7 @@ const List = (props: any, ref: any) => {
 
   useEffect(() => {
     initData();
-  }, [columns, pageNum, params]);
+  }, [columns, pageNum, params, keyword]);
 
   const tableRef = useRef();
   useImperativeHandle(ref, () => ({
@@ -39,7 +39,7 @@ const List = (props: any, ref: any) => {
       setDataColumns(resC);
     }
     url &&
-      post(url, { params, pageNum, pageSize: 10 }).then((res) => {
+      post(url, { params, pageNum, pageSize: 10, keyword }).then((res) => {
         const { list } = res;
         setTotal(res?.total);
         let result = [];
