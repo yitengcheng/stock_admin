@@ -8,6 +8,12 @@ export const EMPLOYEE_TYPE = [
   { label: '管理者', value: 1 },
   { label: '普通员工', value: 2 },
 ];
+export const OPTION_TYPE = [
+  { label: '入库类型', value: 1 },
+  { label: '出库类型', value: 2 },
+  { label: '计量单位', value: 3 },
+  { label: '物品类型', value: 4 },
+];
 
 const dev_url = 'http://localhost:3000';
 const build_url = '';

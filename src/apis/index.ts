@@ -3,6 +3,7 @@ import department from './department';
 import texus from './texus';
 import employee from './employee';
 import suppliers from './suppliers';
+import option from './option';
 
 export default {
   ...user,
@@ -10,4 +11,5 @@ export default {
   ...texus,
   ...employee,
   ...suppliers,
+  ...option,
 };

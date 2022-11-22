@@ -134,7 +134,6 @@ export default () => {
             </Badge>
             <div style={{ height: '30%', width: '1px', backgroundColor: '#CFCFCF' }} />
             <div className={styles.userInfo_box}>
-              <Avatar />
               <p style={{ color: '#3D3D3D' }}>{userInfo.name || '暂无'}</p>
               <DownOutlined style={{ color: '#999999' }} />
             </div>
