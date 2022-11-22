@@ -6,7 +6,7 @@ import { post } from '../../axios';
 import styles from './index.module.less';
 
 export default (props: any) => {
-  const { level = 5, title, onClick } = props;
+  const { level = 5, title = '所有部门', onClick } = props;
   const [treeData, setTreeData] = useStateRef([]);
   const [expande, setExpande, expandeRef] = useStateRef([]);
 

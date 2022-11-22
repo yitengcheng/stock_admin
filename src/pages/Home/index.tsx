@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import styles from './index.module.less';
-import { Layout, Menu, Avatar, Spin, Badge, Breadcrumb, notification } from 'antd';
+import { Layout, Menu, Avatar, Spin, Badge, Breadcrumb, notification, Space, Button } from 'antd';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { routers, menus } from '../../routers';
 import { getStorage, removeStorage } from '../../localStorage';
@@ -107,6 +107,24 @@ export default () => {
       },
     });
   };
+  const openUserOption = () => {
+    notification.open({
+      message: '设置',
+      description: (
+        <Space direction="vertical" align="center">
+          <Button danger type="primary">
+            修改密码
+          </Button>
+          <Button type="primary" onClick={logout}>
+            退出登录
+          </Button>
+        </Space>
+      ),
+      style: {
+        width: '8vw',
+      },
+    });
+  };
 
   return (
     <Spin spinning={loading} tip="加载中。。。">
@@ -135,7 +153,7 @@ export default () => {
             <div style={{ height: '30%', width: '1px', backgroundColor: '#CFCFCF' }} />
             <div className={styles.userInfo_box}>
               <p style={{ color: '#3D3D3D' }}>{userInfo.name || '暂无'}</p>
-              <DownOutlined style={{ color: '#999999' }} />
+              <DownOutlined style={{ color: '#999999' }} onClick={() => openUserOption()} />
             </div>
           </div>
         </Header>

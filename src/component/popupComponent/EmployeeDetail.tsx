@@ -26,7 +26,7 @@ export default (props: any) => {
 
   const handleEmployee = async () => {
     employeeForm.validateFields().then((values) => {
-      post(apis.handleEmployee, { ...values, id: employee._id }).then(() => {
+      post(apis.handleEmployee, { ...values, id: employee?._id }).then(() => {
         employeeForm.resetFields();
         refresh && refresh();
         closeModal && closeModal();

@@ -6,7 +6,7 @@ import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
 import styles from './index.module.less';
-import SortingOptions from '../../component/rowTable/SortingOptions';
+import DepartmentOption from '../../component/leftCommon/DepartmentOption';
 import MyModal from '../../component/common/MyModal';
 import EmployeeDetail from '../../component/popupComponent/EmployeeDetail';
 import apis from '../../apis';
@@ -43,7 +43,7 @@ export default () => {
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')} style={{ flexDirection: 'row' }}>
       {contextHolder}
-      <SortingOptions title="所有部门" onClick={selectDepart} />
+      <DepartmentOption onClick={selectDepart} />
       <div className={styles.mainContainer}>
         <TableScreen label="员工管理">
           <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>

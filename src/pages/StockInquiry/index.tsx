@@ -8,13 +8,13 @@ import TableScreen from '../../component/columnTable/TableScreen';
 import { formCol } from '../../utils';
 import styles from './index.module.less';
 import FormSwitch from '../../component/form/FormSwitch';
-import SortingOptions from '../../component/rowTable/SortingOptions';
+import DepartmentOption from '../../component/leftCommon/DepartmentOption';
 
 export default (props: any) => {
   const [screenForm] = Form.useForm();
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')} style={{ flexDirection: 'row' }}>
-      <SortingOptions title="所有部门" />
+      <DepartmentOption />
       <div className={styles.mainContainer}>
         <TableScreen label="库存查询">
           <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>

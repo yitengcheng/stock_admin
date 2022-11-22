@@ -22,7 +22,7 @@ export default (props: any) => {
 
   const handleSupplier = async () => {
     optionForm.validateFields().then((values) => {
-      post(apis.handleOption, { ...values, id: option._id }).then(() => {
+      post(apis.handleOption, { ...values, id: option?._id }).then(() => {
         optionForm.resetFields();
         refresh && refresh();
         closeModal && closeModal();

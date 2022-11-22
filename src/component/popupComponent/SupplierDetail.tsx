@@ -24,7 +24,7 @@ export default (props: any) => {
 
   const handleSupplier = async () => {
     supplierForm.validateFields().then((values) => {
-      post(apis.handleSuppliers, { ...values, id: supplier._id }).then(() => {
+      post(apis.handleSuppliers, { ...values, id: supplier?._id }).then(() => {
         supplierForm.resetFields();
         refresh && refresh();
         closeModal && closeModal();

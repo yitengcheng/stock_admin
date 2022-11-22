@@ -4,6 +4,7 @@ import texus from './texus';
 import employee from './employee';
 import suppliers from './suppliers';
 import option from './option';
+import good from './good';
 
 export default {
   ...user,
@@ -12,4 +13,5 @@ export default {
   ...employee,
   ...suppliers,
   ...option,
+  ...good,
 };
