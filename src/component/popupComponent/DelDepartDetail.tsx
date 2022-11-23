@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import apis from '../../apis';
 import { post } from '../../axios';
+import { initDepartment } from '../../utils/initOption';
 import FormRadioGroup from '../form/FormRadioGroup';
 import FormSelect from '../form/FormSelect';
 
@@ -10,21 +11,10 @@ export default (props: any) => {
   const { closeModal, refresh } = props;
   const [departForm] = Form.useForm();
   const [departsOption, setDepartOption] = useStateRef([]);
-  useEffect(() => {
-    initDepartOption();
+
+  useEffect(async () => {
+    setDepartOption(await initDepartment());
   }, []);
-  const initDepartOption = async () => {
-    try {
-      const res = await post(apis.departments);
-      let option = [];
-      res.map((o) => {
-        option.push({ label: o.departmentName, value: o._id });
-      });
-      setDepartOption(option);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const delDepartment = async () => {
     departForm.validateFields().then((values) => {
       post(apis.delDepartment, values).then(() => {

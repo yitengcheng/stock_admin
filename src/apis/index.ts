@@ -5,6 +5,7 @@ import employee from './employee';
 import suppliers from './suppliers';
 import option from './option';
 import good from './good';
+import branchQutas from './branchQutas';
 
 export default {
   ...user,
@@ -14,4 +15,5 @@ export default {
   ...suppliers,
   ...option,
   ...good,
+  ...branchQutas,
 };

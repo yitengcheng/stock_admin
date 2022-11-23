@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import apis from '../../apis';
 import { post } from '../../axios';
+import { initDepartment } from '../../utils/initOption';
 import FormInput from '../form/FormInput';
 import FormSelect from '../form/FormSelect';
 import FormTextArea from '../form/FormTextArea';
@@ -11,8 +12,8 @@ export default (props: any) => {
   const { closeModal, refresh, departmentId, employee } = props;
   const [employeeForm] = Form.useForm();
   const [departsOption, setDepartOption] = useStateRef([]);
-  useEffect(() => {
-    initDepartOption();
+  useEffect(async () => {
+    setDepartOption(await initDepartment());
   }, []);
   useEffect(() => {
     employeeForm.setFieldsValue({
@@ -32,18 +33,6 @@ export default (props: any) => {
         closeModal && closeModal();
       });
     });
-  };
-  const initDepartOption = async () => {
-    try {
-      const res = await post(apis.departments);
-      let option = [];
-      res.map((o) => {
-        option.push({ label: o.departmentName, value: o._id });
-      });
-      setDepartOption(option);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (

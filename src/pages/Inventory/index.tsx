@@ -12,6 +12,7 @@ import MyModal from '../../component/common/MyModal';
 import GoodDetail from '../../component/popupComponent/GoodDetail';
 import apis from '../../apis';
 import { post } from '../../axios';
+import { initUnitOption } from '../../utils/initOption';
 
 export default (props: any) => {
   const [screenForm] = Form.useForm();
@@ -22,22 +23,10 @@ export default (props: any) => {
   const [searchParams, setSearchParams, searchParamsRef] = useStateRef({});
   const [unitOption, setUnitOption] = useStateRef([]);
 
-  useEffect(() => {
-    initUnitOption();
+  useEffect(async () => {
+    setUnitOption(await initUnitOption());
   }, []);
 
-  const initUnitOption = async () => {
-    try {
-      const res = await post(apis.options, { type: 3 });
-      let option = [];
-      res.map((o) => {
-        option.push({ label: o.name, value: o._id });
-      });
-      setUnitOption(option);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const selectGoodClassify = (id) => {
     if (id === 1) {
       setClassification(undefined);

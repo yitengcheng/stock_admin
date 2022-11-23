@@ -11,7 +11,13 @@ export default (props: any) => {
   const place = placeholder ?? `请选择${label}`;
   return (
     <Form.Item label={label} name={name} rules={[{ required }, ...rule]}>
-      <Select allowClear placeholder={place} mode={mode}>
+      <Select
+        allowClear
+        placeholder={place}
+        mode={mode}
+        showSearch
+        filterOption={(input, option) => (option?.children ?? '').toLowerCase().includes(input.toLowerCase())}
+      >
         {options.map((option) => (
           <Option key={randomKey()} value={option.value}>
             {option.label}

@@ -15,7 +15,7 @@ export default () => {
     { color: '#FFECEC', icon: '/src/assets/images/recipient.png', title: '员工管理', path: 'employee' },
     { color: '#E2EBFC', icon: '/src/assets/images/putinStorage.png', title: '入库单' },
     { color: '#E2EBFC', icon: '/src/assets/images/list.png', title: '物品清单', path: 'inventory' },
-    { color: '#E6F7E9', icon: '/src/assets/images/quota.png', title: '部门定额' },
+    { color: '#E6F7E9', icon: '/src/assets/images/quota.png', title: '部门定额', path: 'branchQuota' },
   ];
   const pageJump = (path) => {
     navigator(path);

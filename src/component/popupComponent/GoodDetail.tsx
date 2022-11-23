@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import apis from '../../apis';
 import { post } from '../../axios';
+import { initClassificationOption, initSupplierOption, initUnitOption } from '../../utils/initOption';
 import FormInput from '../form/FormInput';
 import FormSelect from '../form/FormSelect';
 import FormTextArea from '../form/FormTextArea';
@@ -14,10 +15,10 @@ export default (props: any) => {
   const [classificationOption, setClassificationOption] = useStateRef([]);
   const [supplierOption, setSupplierOption] = useStateRef([]);
 
-  useEffect(() => {
-    initUnitOption();
-    initClassificationOption();
-    initSupplierOption();
+  useEffect(async () => {
+    setUnitOption(await initUnitOption());
+    setClassificationOption(await initClassificationOption());
+    setSupplierOption(await initSupplierOption());
   }, []);
   useEffect(() => {
     goodForm.setFieldsValue({
@@ -42,42 +43,6 @@ export default (props: any) => {
         closeModal && closeModal();
       });
     });
-  };
-  const initUnitOption = async () => {
-    try {
-      const res = await post(apis.options, { type: 3 });
-      let option = [];
-      res.map((o) => {
-        option.push({ label: o.name, value: o._id });
-      });
-      setUnitOption(option);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const initClassificationOption = async () => {
-    try {
-      const res = await post(apis.options, { type: 4 });
-      let option = [];
-      res.map((o) => {
-        option.push({ label: o.name, value: o._id });
-      });
-      setClassificationOption(option);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const initSupplierOption = async () => {
-    try {
-      const res = await post(apis.suppliers);
-      let option = [];
-      res.map((o) => {
-        option.push({ label: o.name, value: o._id });
-      });
-      setSupplierOption(option);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
