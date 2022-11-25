@@ -8,7 +8,6 @@ export const theme = {
     colorTextBase: '#333333',
     colorTextSecondary: '#666666',
     colorTextTertiary: '#999999',
-    colorTextQuaternary: '#cdcdcd',
     colorBorder: '#dcdfe6',
     colorFill: '#f4f4f5',
   },

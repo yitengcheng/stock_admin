@@ -14,6 +14,10 @@ export const OPTION_TYPE = [
   { label: '计量单位', value: 3 },
   { label: '物品类型', value: 4 },
 ];
+export const GODOWNENTRY_TYPE = [
+  { label: '正常', value: 1 },
+  { label: '作废', value: 2 },
+];
 
 const dev_url = 'http://localhost:3000';
 const build_url = '';

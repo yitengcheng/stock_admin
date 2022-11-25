@@ -22,6 +22,16 @@ export const initUnitOption = async () => {
   return option;
 };
 
+// 生成入库类型Option
+export const initStorageTypeOption = async () => {
+  const res = await post(apis.options, { type: 1 });
+  let option = [];
+  res.map((o) => {
+    option.push({ label: o.name, value: o._id });
+  });
+  return option;
+};
+
 // 生成物品分类Option
 export const initClassificationOption = async () => {
   const res = await post(apis.options, { type: 4 });
@@ -43,8 +53,18 @@ export const initSupplierOption = async () => {
 };
 
 // 生成物品Option
-export const initGoodOption = async () => {
-  const res = await post(apis.goods);
+export const initGoodOption = async (supplierId) => {
+  const res = await post(apis.goods, { supplierId });
+  let option = [];
+  res.map((o) => {
+    option.push({ label: o.name, value: o._id });
+  });
+  return option;
+};
+
+// 生成员工Option
+export const initEmployeeOption = async () => {
+  const res = await post(apis.employees);
   let option = [];
   res.map((o) => {
     option.push({ label: o.name, value: o._id });

@@ -4,7 +4,7 @@ import React from 'react';
 export default (props: any) => {
   const { label, name, required = true, rule = [], options = ['', ''] } = props;
   return (
-    <Form.Item label={label} name={name} rules={[{ required }, ...rule]}>
+    <Form.Item label={label} name={name} rules={[{ required }, ...rule]} valuePropName="checked">
       <Switch checkedChildren={options[0]} unCheckedChildren={options[1]} />
     </Form.Item>
   );

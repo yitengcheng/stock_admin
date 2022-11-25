@@ -1,5 +1,6 @@
 import { Form, Select } from 'antd';
 import React from 'react';
+import useStateRef from 'react-usestateref';
 import { randomKey } from '../../utils';
 const { Option } = Select;
 
@@ -7,7 +8,7 @@ export default (props: any) => {
   /**
    * option = [{label:string,value: string|number}]
    */
-  const { label, name, required = true, rule = [], placeholder, options = [], mode } = props;
+  const { label, name, required = true, rule = [], placeholder, options = [], mode, onChange } = props;
   const place = placeholder ?? `请选择${label}`;
   return (
     <Form.Item label={label} name={name} rules={[{ required }, ...rule]}>
@@ -17,13 +18,11 @@ export default (props: any) => {
         mode={mode}
         showSearch
         filterOption={(input, option) => (option?.children ?? '').toLowerCase().includes(input.toLowerCase())}
-      >
-        {options.map((option) => (
-          <Option key={randomKey()} value={option.value}>
-            {option.label}
-          </Option>
-        ))}
-      </Select>
+        onChange={(value) => {
+          onChange && onChange(value);
+        }}
+        options={options}
+      />
     </Form.Item>
   );
 };
