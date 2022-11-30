@@ -115,18 +115,20 @@ export default (props: any) => {
           {
             title: '操作',
             render: (text, record) => {
-              record?.status === 1 && (
-                <Button
-                  size="small"
-                  type="link"
-                  danger
-                  onClick={() => {
-                    invalidGodownEntry(record?._id);
-                  }}
-                >
-                  作废
-                </Button>
-              );
+              if (record?.status === 1) {
+                return (
+                  <Button
+                    size="small"
+                    type="link"
+                    danger
+                    onClick={() => {
+                      invalidGodownEntry(record?._id);
+                    }}
+                  >
+                    作废
+                  </Button>
+                );
+              }
             },
           },
         ]}

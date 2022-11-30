@@ -14,10 +14,11 @@ export default (props: any) => {
       { value: true, label: '是' },
     ],
     mode,
+    ...other
   } = props;
   return (
     <Form.Item label={label} name={name} rules={[{ required }, ...rule]}>
-      <Group allowClear mode={mode}>
+      <Group allowClear mode={mode} {...other}>
         {options.map((option) => (
           <Radio key={randomKey()} value={option.value}>
             {option.label}

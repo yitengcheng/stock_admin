@@ -32,6 +32,16 @@ export const initStorageTypeOption = async () => {
   return option;
 };
 
+// 生成出库类型Option
+export const initOutboundTypeOption = async () => {
+  const res = await post(apis.options, { type: 2 });
+  let option = [];
+  res.map((o) => {
+    option.push({ label: o.name, value: o._id });
+  });
+  return option;
+};
+
 // 生成物品分类Option
 export const initClassificationOption = async () => {
   const res = await post(apis.options, { type: 4 });

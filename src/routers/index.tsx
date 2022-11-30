@@ -73,11 +73,11 @@ export const menus = [
         key: 'item-1-3',
         path: 'integratedQuery',
       },
-      {
-        label: '物品清单',
-        key: 'item-1-4',
-        path: 'inventory',
-      },
+      // {
+      //   label: '物品清单',
+      //   key: 'item-1-4',
+      //   path: 'inventory',
+      // },
     ],
   },
   {
@@ -114,7 +114,7 @@ export const menus = [
   },
   {
     label: '库存查询',
-    path: 'stockInquiry',
+    path: 'inventory',
     key: 'item-4',
   },
   {

@@ -7,6 +7,7 @@ import option from './option';
 import good from './good';
 import branchQutas from './branchQutas';
 import godownEntry from './godownEntry';
+import outboundOrder from './outboundOrder';
 
 export default {
   ...user,
@@ -17,5 +18,6 @@ export default {
   ...option,
   ...good,
   ...branchQutas,
+  ...outboundOrder,
   ...godownEntry,
 };

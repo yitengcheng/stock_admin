@@ -1,5 +1,5 @@
-import { Form, Row, Space } from 'antd';
-import React from 'react';
+import { Button, Form, Row, Space } from 'antd';
+import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
 import FormInput from '../../component/form/FormInput';
@@ -8,9 +8,140 @@ import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
 import styles from './index.module.less';
+import lodash from 'lodash';
+import dayjs from 'dayjs';
+import {
+  initDepartment,
+  initEmployeeOption,
+  initOutboundTypeOption,
+  initStorageTypeOption,
+  initSupplierOption,
+} from '../../utils/initOption';
+import apis from '../../apis';
+import { showOption } from '../../utils';
+import { GODOWNENTRY_TYPE, OUTBOUNDORDER_TYPE } from '../../constant';
 
 export default (props: any) => {
   const [screenForm] = Form.useForm();
+  const [itemType, setItemType] = useStateRef('');
+  const [storageTypeOption, setStorageTypeOption] = useStateRef([]);
+  const [supplierOption, setSupplierOption] = useStateRef([]);
+  const [employeeOption, setEmployeeOption] = useStateRef([]);
+  const [outboundTypeOption, setOutboundTypeOption] = useStateRef([]);
+  const [departmentOption, setDepartmentOption] = useStateRef([]);
+  const [url, setUrl, urlRef] = useStateRef('');
+  const [params, setParams] = useStateRef({});
+  const [columns, setColumns] = useStateRef([]);
+
+  useEffect(async () => {
+    setStorageTypeOption(await initStorageTypeOption());
+    setSupplierOption(await initSupplierOption());
+    setEmployeeOption(await initEmployeeOption());
+    setOutboundTypeOption(await initOutboundTypeOption());
+    setDepartmentOption(await initDepartment());
+  }, []);
+
+  const onChangeType = (value) => {
+    if (value === 1) {
+      setUrl(apis.outboundOrderTable);
+      setColumns([
+        { title: '出库单号', dataIndex: 'orderNo', width: 80 },
+        {
+          title: '物品名称',
+          dataIndex: 'outboundItems',
+          render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
+        },
+        { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
+        { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
+        {
+          title: '出库类型',
+          dataIndex: 'outboundType',
+          width: 80,
+          render: (obj) => <span>{obj?.name || '暂无'}</span>,
+        },
+        {
+          title: '出库时间',
+          dataindex: 'outboundTime',
+          width: 80,
+          render: (obj) => (
+            <span>{obj?.outboundTime ? dayjs(obj?.outboundTime).format('YYYY年MM月DD日') : '暂无'}</span>
+          ),
+        },
+        {
+          title: '状态',
+          dataindex: 'status',
+          width: 80,
+          render: (obj) => <span>{obj?.status ? showOption(OUTBOUNDORDER_TYPE, obj?.status) : '暂无'}</span>,
+        },
+        { title: '备注', dataIndex: 'remark', width: 160 },
+      ]);
+    }
+    if (value === 2) {
+      setUrl(apis.godownEntryTable);
+      setColumns([
+        { title: '入库单号', dataIndex: 'orderNo', width: 80 },
+        {
+          title: '物品名称',
+          dataIndex: 'godownEntryIds',
+          render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
+        },
+        { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
+        { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
+        {
+          title: '入库类型',
+          dataIndex: 'storageType',
+          width: 80,
+          render: (obj) => <span>{obj?.name || '暂无'}</span>,
+        },
+        {
+          title: '入库时间',
+          dataindex: 'storageTime',
+          width: 80,
+          render: (obj) => <span>{obj?.storageTime ? dayjs(obj?.storageTime).format('YYYY年MM月DD日') : '暂无'}</span>,
+        },
+        {
+          title: '状态',
+          dataindex: 'status',
+          width: 80,
+          render: (obj) => <span>{obj?.status ? showOption(GODOWNENTRY_TYPE, obj?.status) : '暂无'}</span>,
+        },
+        { title: '备注', dataIndex: 'remark', width: 160 },
+      ]);
+    }
+    setItemType(value);
+  };
+  const godownEntrySearch = () => {
+    return (
+      <Row>
+        <Space size="large">
+          <FormInput label="单据编号" required={false} name="orderNo" />
+          <FormDateRangePicker label="入库时间" required={false} name="storageTime" />
+          <FormSelect label="入库类型" required={false} name="storageType" options={storageTypeOption} />
+          <FormSelect label="供应商" required={false} name="supplierId" options={supplierOption} />
+          <FormSelect label="经手人" required={false} name="handleUser" options={employeeOption} />
+        </Space>
+      </Row>
+    );
+  };
+  const outboundOrderSearch = () => {
+    return (
+      <Row>
+        <Space size="large">
+          <FormInput label="单据编号" required={false} name="orderNo" />
+          <FormDateRangePicker label="出库时间" required={false} name="outboundTime" />
+          <FormSelect label="出库类型" required={false} name="outboundType" options={outboundTypeOption} />
+          <FormSelect label="领用部门" required={false} name="receiveDepartment" options={departmentOption} />
+          <FormSelect label="领用人" required={false} name="receiveUser" options={employeeOption} />
+        </Space>
+      </Row>
+    );
+  };
+  const search = () => {
+    screenForm.validateFields().then((values) => {
+      setParams(values);
+    });
+  };
+
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')}>
       <TableScreen label="出入库查询">
@@ -24,42 +155,19 @@ export default (props: any) => {
                 { label: '出库查询', value: 1 },
                 { label: '入库查询', value: 2 },
               ]}
+              onChange={({ target }) => onChangeType(target.value)}
             />
           </Row>
-          <Row>
-            <Space>
-              <FormSelect label="登账状态" required={false} name="bookkeepingState" />
-              <FormInput label="单据编号" required={false} name="receiptNumber" />
-              <FormInput label="物品名称" required={false} name="itemName" />
-              <FormSelect label="领用人" required={false} name="recipient" />
-              <FormDateRangePicker label="出库时间" required={false} name="deliveryTime" />
-            </Space>
-          </Row>
-          <Row>
-            <Space>
-              <FormSelect label="领用部门" required={false} name="recipientsDepartment" />
-              <FormInput label="物品编号" required={false} name="itemCode" />
-              <FormInput label="规格型号" required={false} name="specifications" />
-              <FormSelect label="制单人" required={false} name="makingPeople" />
-              <FormSelect label="出库类型" required={false} name="outboundType" />
-            </Space>
-          </Row>
+          {itemType === 2 && godownEntrySearch()}
+          {itemType === 1 && outboundOrderSearch()}
+          {itemType && (
+            <Button type="primary" onClick={search}>
+              查询
+            </Button>
+          )}
         </Form>
       </TableScreen>
-      <MyTable
-        onAddBtn={() => {}}
-        onDelBtn={() => {}}
-        columns={[
-          { title: '登账状态' },
-          { title: '单据编号' },
-          { title: '出库时间' },
-          { title: '出库类型' },
-          { title: '领用部门' },
-          { title: '领用人' },
-          { title: '制单人' },
-          { title: '备注' },
-        ]}
-      />
+      <MyTable url={urlRef.current} params={params} columns={columns} />
     </div>
   );
 };
