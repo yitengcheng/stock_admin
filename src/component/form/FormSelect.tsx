@@ -8,7 +8,7 @@ export default (props: any) => {
   /**
    * option = [{label:string,value: string|number}]
    */
-  const { label, name, required = true, rule = [], placeholder, options = [], mode, onChange } = props;
+  const { label, name, required = true, rule = [], placeholder, options = [], mode, onChange, ...other } = props;
   const place = placeholder ?? `请选择${label}`;
   return (
     <Form.Item label={label} name={name} rules={[{ required }, ...rule]}>
@@ -22,6 +22,7 @@ export default (props: any) => {
           onChange && onChange(value);
         }}
         options={options}
+        {...other}
       />
     </Form.Item>
   );

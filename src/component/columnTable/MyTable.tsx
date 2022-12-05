@@ -7,7 +7,19 @@ import lodash from 'lodash';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 const List = (props: any, ref: any) => {
-  const { width, height, columns, onClickRow, url, onAddBtn, onDelBtn, name = '', params, keyword } = props;
+  const {
+    width,
+    height,
+    columns,
+    onClickRow,
+    url,
+    onAddBtn,
+    addBtnText = '新增',
+    onDelBtn,
+    name = '',
+    params,
+    keyword,
+  } = props;
   const [pageNum, setPageNum] = useState(1);
   const [total, setTotal] = useState(undefined);
   const [dataSource, setDataSource] = useState();
@@ -67,7 +79,7 @@ const List = (props: any, ref: any) => {
           <Space>
             {onAddBtn && (
               <Button size="small" type="primary" icon={<PlusCircleOutlined />} onClick={() => onAddBtn()}>
-                新增
+                {addBtnText}
               </Button>
             )}
             {onDelBtn && (

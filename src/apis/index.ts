@@ -8,6 +8,7 @@ import good from './good';
 import branchQutas from './branchQutas';
 import godownEntry from './godownEntry';
 import outboundOrder from './outboundOrder';
+import auditUser from './auditUser';
 
 export default {
   ...user,
@@ -20,4 +21,5 @@ export default {
   ...branchQutas,
   ...outboundOrder,
   ...godownEntry,
+  ...auditUser,
 };

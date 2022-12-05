@@ -21,7 +21,7 @@ import FormTextArea from '../form/FormTextArea';
 import lodash from 'lodash';
 
 export default (props: any) => {
-  const { closeModal, refresh } = props;
+  const { closeModal, refresh, mode, outboundOrder } = props;
   const [outboundOrderForm] = Form.useForm();
   const [outboundTypeOption, setOutboundTypeOption] = useStateRef([]);
   const [employeeOption, setEmployeeOption] = useStateRef([]);
@@ -31,17 +31,53 @@ export default (props: any) => {
     setOutboundTypeOption(await initOutboundTypeOption());
     setEmployeeOption(await initEmployeeOption());
     setGoodsOption(await initGoodOption());
-  }, []);
-  outboundOrderForm.setFieldValue('orderNo', `CK${dayjs().format('YYYYMMDDHHmmss')}`);
+    initFormData();
+  }, [outboundOrder]);
 
   const handleGood = async () => {
     outboundOrderForm.validateFields().then((values) => {
-      post(apis.handleOutboundOrder, values).then(() => {
+      let url = '';
+      switch (mode) {
+        case 1:
+          url = apis.handleOutboundOrder;
+          break;
+        case 2:
+          url = apis.applyOutboundOrder;
+          break;
+        case 3:
+          url = apis.stockRemovalOrder;
+          break;
+        default:
+          break;
+      }
+      post(url, { id: outboundOrder?._id, ...values }).then(() => {
         outboundOrderForm.resetFields();
         refresh && refresh();
         closeModal && closeModal();
       });
     });
+  };
+  const initFormData = () => {
+    if (!outboundOrder) {
+      outboundOrderForm.setFieldValue('orderNo', `CK${dayjs().format('YYYYMMDDHHmmss')}`);
+    }
+    let goodIds = [];
+    outboundOrderForm.setFieldValue('orderNo', outboundOrder.orderNo);
+    outboundOrderForm.setFieldValue('outboundTime', outboundOrder.outboundTime);
+    outboundOrderForm.setFieldValue('outboundType', outboundOrder.outboundType);
+    outboundOrderForm.setFieldValue('receiveUser', outboundOrder.receiveUser?._id);
+    outboundOrderForm.setFieldValue('remark', outboundOrder.remark);
+    outboundOrder?.outboundItems.map((item) => {
+      const { goodId, goodNum } = item;
+      goodIds.push({
+        id: goodId?._id,
+        models: goodId?.models,
+        unit: goodId?.unit?.name,
+        price: goodId?.price,
+        goodNum,
+      });
+    });
+    outboundOrderForm.setFieldValue('goodIds', goodIds);
   };
 
   return (
@@ -49,13 +85,23 @@ export default (props: any) => {
       <Row>
         <Space size="large">
           <FormInput label="单据编号" name="orderNo" disabled={true} />
-          <FormDatePicker label="出库时间" name="outboundTime" />
-          <FormSelect label="出库类型" name="outboundType" options={outboundTypeOption} />
-          <FormSelect label="领用人" name="receiveUser" options={employeeOption} required={false} />
+          {mode !== 2 && <FormDatePicker label="出库时间" name="outboundTime" />}
+          {mode !== 2 && <FormSelect label="出库类型" name="outboundType" options={outboundTypeOption} />}
+          {mode !== 2 && (
+            <FormSelect
+              label="领用人"
+              name="receiveUser"
+              options={employeeOption}
+              required={false}
+              disabled={mode === 3}
+            />
+          )}
         </Space>
       </Row>
       <FormTextArea label="备注" name="remark" required={false} />
-      <FormSwitch label="同步到明细" name="hasSynchronous" required={false} options={['同步', '不同步']} />
+      {mode !== 2 && (
+        <FormSwitch label="同步到明细" name="hasSynchronous" required={false} options={['同步', '不同步']} />
+      )}
       <Form.List name="goodIds">
         {(fields, { add, remove }) => (
           <>
@@ -83,27 +129,32 @@ export default (props: any) => {
                       onChange={(value) => {
                         onChangeGood(value);
                       }}
+                      disabled={mode === 3}
                     />
                     <FormInput required={false} label="规格" name={[field.name, 'models']} disabled={true} />
                     <FormInput required={false} label="单位" name={[field.name, 'unit']} disabled={true} />
                     <FormInput required={false} label="单价" name={[field.name, 'price']} disabled={true} />
-                    <FormInput label="数量" name={[field.name, 'goodNum']} />
-                    <Form.Item>
-                      <MinusCircleOutlined
-                        onClick={() => {
-                          remove(field.name);
-                        }}
-                      />
-                    </Form.Item>
+                    <FormInput label="数量" name={[field.name, 'goodNum']} disabled={mode === 3} />
+                    {mode !== 3 && (
+                      <Form.Item>
+                        <MinusCircleOutlined
+                          onClick={() => {
+                            remove(field.name);
+                          }}
+                        />
+                      </Form.Item>
+                    )}
                   </Space>
                 </Row>
               );
             })}
-            <Form.Item>
-              <Button type="dashed" onClick={add} icon={<PlusOutlined />}>
-                添加物品
-              </Button>
-            </Form.Item>
+            {mode !== 3 && (
+              <Form.Item>
+                <Button type="dashed" onClick={add} icon={<PlusOutlined />}>
+                  添加物品
+                </Button>
+              </Form.Item>
+            )}
           </>
         )}
       </Form.List>

@@ -21,6 +21,9 @@ import DepartmentManagement from '@/pages/DepartmentManagement';
 import Employee from '@/pages/Employee';
 import Supplier from '@/pages/Supplier';
 import Option from '@/pages/Option';
+import AuditSetup from '@/pages/AuditSetup';
+import CheckOutboundOrder from '@/pages/CheckOutboundOrder';
+import CheckOutboundOrderHistory from '@/pages/CheckOutboundOrderHistory';
 
 export const routers = [
   { key: 'item-0', path: '', element: Home, label: '工作台' },
@@ -46,6 +49,9 @@ export const routers = [
   { key: 'item-7', path: 'employee', element: Employee, label: '员工管理' },
   { key: 'item-8', path: 'supplier', element: Supplier, label: '供应商管理' },
   { key: 'item-9', path: 'option', element: Option, label: '选项管理' },
+  { key: 'item-10', path: 'auditSetup', element: AuditSetup, label: '审核设置' },
+  { key: 'item-3-3', path: 'checkOutboundOrder', element: CheckOutboundOrder, label: '审批列表' },
+  { key: 'item-3-4', path: 'checkOutboundOrderHistory', element: CheckOutboundOrderHistory, label: '审批历史' },
 ];
 
 export const menus = [
@@ -73,11 +79,6 @@ export const menus = [
         key: 'item-1-3',
         path: 'integratedQuery',
       },
-      // {
-      //   label: '物品清单',
-      //   key: 'item-1-4',
-      //   path: 'inventory',
-      // },
     ],
   },
   {
@@ -100,6 +101,16 @@ export const menus = [
     label: '物品申领',
     key: 'item-3',
     children: [
+      {
+        label: '审批列表',
+        key: 'item-3-3',
+        path: 'checkOutboundOrder',
+      },
+      {
+        label: '审批历史',
+        key: 'item-3-4',
+        path: 'checkOutboundOrderHistory',
+      },
       {
         label: '物品申领',
         key: 'item-3-1',

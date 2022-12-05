@@ -25,25 +25,19 @@ export default (props: any) => {
   const userInfo = getStorage('userInfo');
   const [outboundOrderId, setOutboundOrderId] = useStateRef('');
 
-  const cancelOutboundOrder = (id) => {
-    Modal.error({
-      content: '确认是否取消物品申领',
-      onOk: () => {
-        post(apis.cancelOutboundOrder, { id }).then((result) => {
-          tableRef.current.refresh();
-        });
-      },
-    });
-  };
   const checkOrder = (id) => {
     Modal.confirm({
       title: '是否同意该申请单',
       icon: <ExclamationCircleFilled />,
       onOk() {
-        post(apis.checkOutboundOrder, { id, auditStatus: 2 });
+        post(apis.checkOutboundOrder, { id, auditStatus: 2 }).then(() => {
+          tableRef.current.refresh();
+        });
       },
       onCancel() {
-        post(apis.checkOutboundOrder, { id, auditStatus: 3 });
+        post(apis.checkOutboundOrder, { id, auditStatus: 3 }).then(() => {
+          tableRef.current.refresh();
+        });
       },
     });
   };
@@ -52,16 +46,11 @@ export default (props: any) => {
     <div className={['baseContainer', 'baseHeight'].join(' ')}>
       <MyTable
         ref={tableRef}
-        onAddBtn={() => {
-          modalRef.current.openModal();
-        }}
         params={{
-          receiveUser: userInfo._id,
-          status: { $gte: 4 },
+          type: 1,
         }}
-        url={apis.outboundOrderTable}
-        addBtnText="申领物品"
-        name="物品申领历史列表"
+        url={apis.checkOutboundOrderTable}
+        name="审批列表"
         width={2200}
         columns={[
           { title: '出库单号', dataIndex: 'orderNo', width: 100 },
@@ -101,29 +90,39 @@ export default (props: any) => {
           { title: '备注', dataIndex: 'remark', width: 160 },
           {
             title: '操作',
-            width: 120,
+            width: 140,
             fixed: 'right',
             render: (text, record) => (
               <Space size="small">
                 <Button
                   size="small"
-                  type="primary"
+                  type="text"
                   onClick={() => {
-                    setOutboundOrderId(record?._id);
-                    lookModalRef.current.openModal();
+                    checkOrder(record?._id);
                   }}
                 >
-                  查看申领单
+                  审核
                 </Button>
                 <Button
                   size="small"
-                  type="primary"
+                  type="link"
                   onClick={() => {
                     setOutboundOrderId(record?._id);
                     lookStatusModalRef.current.openModal();
                   }}
                 >
                   查看审核状态
+                </Button>
+                <Button
+                  size="small"
+                  type="text"
+                  danger
+                  onClick={() => {
+                    setOutboundOrderId(record?._id);
+                    lookModalRef.current.openModal();
+                  }}
+                >
+                  查看申领单
                 </Button>
               </Space>
             ),

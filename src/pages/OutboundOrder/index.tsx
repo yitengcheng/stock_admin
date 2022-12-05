@@ -1,4 +1,4 @@
-import { Button, Form, Modal } from 'antd';
+import { Button, Form, Modal, Space } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
@@ -16,16 +16,20 @@ import { initDepartment, initEmployeeOption, initOutboundTypeOption } from '../.
 import { showOption } from '../../utils';
 import { OUTBOUNDORDER_TYPE } from '../../constant';
 import { post } from '../../axios';
+import OutboundOrderLook from '../../component/popupComponent/OutboundOrderLook';
 
 export default (props: any) => {
   const [screenForm] = Form.useForm();
   const modalRef = useRef(0);
   const tableRef = useRef(0);
+  const lookModalRef = useRef(0);
   const [outboundOrder, setOutboundOrder, outboundOrderRef] = useStateRef({});
   const [outboundTypeOption, setOutboundTypeOption] = useStateRef([]);
   const [employeeOption, setEmployeeOption] = useStateRef([]);
   const [departmentOption, setDepartmentOption] = useStateRef([]);
   const [params, setParams] = useStateRef({});
+  const [outboundOrderId, setOutboundOrderId] = useStateRef('');
+  const [mode, setMode] = useStateRef(1);
 
   useEffect(async () => {
     setOutboundTypeOption(await initOutboundTypeOption());
@@ -73,10 +77,12 @@ export default (props: any) => {
         url={apis.outboundOrderTable}
         params={params}
         onAddBtn={() => {
+          setOutboundOrder({});
+          setMode(1);
           modalRef.current.openModal();
         }}
         columns={[
-          { title: '出库单号', dataIndex: 'orderNo', width: 80 },
+          { title: '出库单号', dataIndex: 'orderNo', width: 100 },
           {
             title: '物品名称',
             dataIndex: 'outboundItems',
@@ -107,12 +113,14 @@ export default (props: any) => {
           { title: '备注', dataIndex: 'remark', width: 160 },
           {
             title: '操作',
-            render: (text, record) => {
-              if (record?.status === 4) {
-                return (
+            width: 140,
+            fixed: 'right',
+            render: (text, record) => (
+              <Space>
+                {record?.status <= 4 && (
                   <Button
                     size="small"
-                    type="link"
+                    type="text"
                     danger
                     onClick={() => {
                       invalidOutboundOrder(record?._id);
@@ -120,9 +128,32 @@ export default (props: any) => {
                   >
                     作废
                   </Button>
-                );
-              }
-            },
+                )}
+                {record?.status === 3 && (
+                  <Button
+                    size="small"
+                    type="link"
+                    onClick={() => {
+                      setMode(3);
+                      setOutboundOrder(record);
+                      modalRef.current.openModal();
+                    }}
+                  >
+                    领用
+                  </Button>
+                )}
+                <Button
+                  size="small"
+                  type="text"
+                  onClick={() => {
+                    setOutboundOrderId(record._id);
+                    lookModalRef.current.openModal();
+                  }}
+                >
+                  查看出库单
+                </Button>
+              </Space>
+            ),
           },
         ]}
       />
@@ -142,6 +173,15 @@ export default (props: any) => {
             modalRef.current.closeModal();
           }}
           outboundOrder={outboundOrderRef.current}
+          mode={mode}
+        />
+      </MyModal>
+      <MyModal ref={lookModalRef} title="出库单详情" width={1200}>
+        <OutboundOrderLook
+          closeModal={() => {
+            lookModalRef.current.closeModal();
+          }}
+          id={outboundOrderId}
         />
       </MyModal>
     </div>

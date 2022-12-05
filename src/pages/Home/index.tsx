@@ -112,6 +112,14 @@ export default () => {
       message: '设置',
       description: (
         <Space direction="vertical" align="center">
+          <Button
+            type="primary"
+            onClick={() => {
+              navigator('auditSetup');
+            }}
+          >
+            审核设置
+          </Button>
           <Button danger type="primary">
             修改密码
           </Button>
@@ -121,7 +129,9 @@ export default () => {
         </Space>
       ),
       style: {
-        width: '8vw',
+        width: '9vw',
+        display: 'flex',
+        justifyContent: 'center',
       },
     });
   };

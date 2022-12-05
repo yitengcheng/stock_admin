@@ -24,6 +24,13 @@ export const OUTBOUNDORDER_TYPE = [
   { label: '待领用', value: 3 },
   { label: '完成', value: 4 },
   { label: '作废', value: 5 },
+  { label: '申领取消', value: 6 },
+  { label: '审批拒绝', value: 7 },
+];
+export const AUDITSTATUS_TYPE = [
+  { label: '待审核', value: 1 },
+  { label: '同意', value: 2 },
+  { label: '拒绝', value: 3 },
 ];
 
 const dev_url = 'http://localhost:3000';

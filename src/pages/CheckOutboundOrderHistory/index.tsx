@@ -25,43 +25,15 @@ export default (props: any) => {
   const userInfo = getStorage('userInfo');
   const [outboundOrderId, setOutboundOrderId] = useStateRef('');
 
-  const cancelOutboundOrder = (id) => {
-    Modal.error({
-      content: '确认是否取消物品申领',
-      onOk: () => {
-        post(apis.cancelOutboundOrder, { id }).then((result) => {
-          tableRef.current.refresh();
-        });
-      },
-    });
-  };
-  const checkOrder = (id) => {
-    Modal.confirm({
-      title: '是否同意该申请单',
-      icon: <ExclamationCircleFilled />,
-      onOk() {
-        post(apis.checkOutboundOrder, { id, auditStatus: 2 });
-      },
-      onCancel() {
-        post(apis.checkOutboundOrder, { id, auditStatus: 3 });
-      },
-    });
-  };
-
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')}>
       <MyTable
         ref={tableRef}
-        onAddBtn={() => {
-          modalRef.current.openModal();
-        }}
         params={{
-          receiveUser: userInfo._id,
-          status: { $gte: 4 },
+          type: 2,
         }}
-        url={apis.outboundOrderTable}
-        addBtnText="申领物品"
-        name="物品申领历史列表"
+        url={apis.checkOutboundOrderTable}
+        name="审批历史列表"
         width={2200}
         columns={[
           { title: '出库单号', dataIndex: 'orderNo', width: 100 },
