@@ -19,6 +19,7 @@ const List = (props: any, ref: any) => {
     name = '',
     params,
     keyword,
+    summary,
   } = props;
   const [pageNum, setPageNum] = useState(1);
   const [total, setTotal] = useState(undefined);
@@ -96,6 +97,7 @@ const List = (props: any, ref: any) => {
         columns={dataColumns}
         dataSource={dataSource}
         bordered
+        summary={summary}
         pagination={{ total }}
         scroll={{ y: height ? height - 60 : undefined, scrollToFirstRowOnChange: true, x: width }}
         onRow={(record) => {

@@ -162,21 +162,21 @@ export const menus = [
         key: 'item-5-6',
         path: 'shouFaJieCun',
       },
-      {
-        label: '物品出入汇总表',
-        key: 'item-5-7',
-        path: 'wuPinChuRu',
-      },
+      // {
+      //   label: '物品出入汇总表',
+      //   key: 'item-5-7',
+      //   path: 'wuPinChuRu',
+      // },
       {
         label: '物品分类汇总表',
         key: 'item-5-8',
         path: 'wuPinFenLei',
       },
-      {
-        label: '组合查询统计表',
-        key: 'item-5-9',
-        path: 'zuHeChaXun',
-      },
+      // {
+      //   label: '组合查询统计表',
+      //   key: 'item-5-9',
+      //   path: 'zuHeChaXun',
+      // },
     ],
   },
 ];

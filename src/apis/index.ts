@@ -9,6 +9,7 @@ import branchQutas from './branchQutas';
 import godownEntry from './godownEntry';
 import outboundOrder from './outboundOrder';
 import auditUser from './auditUser';
+import statistical from './statistical';
 
 export default {
   ...user,
@@ -22,4 +23,5 @@ export default {
   ...outboundOrder,
   ...godownEntry,
   ...auditUser,
+  ...statistical,
 };

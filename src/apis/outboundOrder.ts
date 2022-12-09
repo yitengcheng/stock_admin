@@ -9,4 +9,5 @@ export default {
   checkOutboundOrder: '/outboundOrder/checkOutboundOrder', // 审批物品申请接口
   checkOutboundOrderTable: '/outboundOrder/checkOutboundOrderTable', // 审核出库单列表接口（分页）
   stockRemovalOrder: '/outboundOrder/stockRemovalOrder', // 领用出库单接口
+  accessTable: '/outboundOrder/accessTable', // 部门/人员领用汇总表接口（分页）
 };

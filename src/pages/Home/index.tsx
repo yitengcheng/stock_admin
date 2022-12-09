@@ -157,10 +157,10 @@ export default () => {
             items={menus}
           />
           <div className={styles.headerRight_box}>
-            <Badge count={5}>
+            {/* <Badge count={5}>
               <BellOutlined style={{ fontSize: '160%', color: '#0575F3' }} onClick={() => openNotification()} />
             </Badge>
-            <div style={{ height: '30%', width: '1px', backgroundColor: '#CFCFCF' }} />
+            <div style={{ height: '30%', width: '1px', backgroundColor: '#CFCFCF' }} /> */}
             <div className={styles.userInfo_box}>
               <p style={{ color: '#3D3D3D' }}>{userInfo.name || '暂无'}</p>
               <DownOutlined style={{ color: '#999999' }} onClick={() => openUserOption()} />

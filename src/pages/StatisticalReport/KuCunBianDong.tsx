@@ -1,5 +1,5 @@
-import { Form } from 'antd';
-import React from 'react';
+import { Button, Form, Table, Typography } from 'antd';
+import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
 import FormInput from '../../component/form/FormInput';
@@ -7,35 +7,95 @@ import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
 import styles from './index.module.less';
+import apis from '../../apis';
+import { post } from '../../axios';
+import dayjs from 'dayjs';
+
+const { Text } = Typography;
 
 export default (props: any) => {
   const [screenForm] = Form.useForm();
+  const [tableData, setTableData] = useStateRef([]);
+  const [params, setParams] = useStateRef({});
+
+  useEffect(() => {
+    initTableData();
+  }, [params]);
+
+  const initTableData = () => {
+    post(apis.goodChangeTable, params).then((res) => {
+      setTableData(res?.list);
+    });
+  };
+  const search = () => {
+    screenForm.validateFields().then((values) => {
+      setParams(values);
+    });
+  };
+
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')}>
       <TableScreen label="库存变动汇总表">
         <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>
-          <FormInput label="单据编号" required={false} name="receiptNumber" />
-          <FormDateRangePicker label="出库时间" required={false} name="deliveryTime" />
-          <FormSelect label="入库类型" required={false} name="outboundType" />
-          <FormSelect label="供应商" required={false} name="recipientsDepartment" />
-          <FormSelect label="经办人" required={false} name="recipient" />
+          <FormDateRangePicker label="时间范围" required={false} name="time" />
+          <Button type="primary" onClick={search}>
+            查询
+          </Button>
         </Form>
       </TableScreen>
-      <MyTable
-        onAddBtn={() => {}}
-        onDelBtn={() => {}}
-        columns={[
-          { title: '物品编号' },
-          { title: '物品名称' },
-          { title: '规格' },
-          { title: '单位' },
-          { title: '数量' },
-          { title: '单价' },
-          { title: '金额' },
-          { title: '库存数量' },
-          { title: '备注' },
-        ]}
-      />
+      <div className={styles.tableContainer}>
+        <Table
+          dataSource={tableData}
+          bordered
+          columns={[
+            {
+              title: '发生日期',
+              dataIndex: 'date',
+              align: 'center',
+              render: (obj) => <span>{obj ? dayjs(obj).format('YYYY年MM月DD日') : '暂无'}</span>,
+            },
+            {
+              title: '单据编号',
+              dataIndex: 'orderNo',
+              align: 'center',
+              render: (obj) => <span>{obj ?? '暂无'}</span>,
+            },
+            { title: '物品名称', dataIndex: 'goodName', align: 'center' },
+            { title: '规格', dataIndex: 'goodModels', align: 'center' },
+            { title: '单位', dataIndex: 'goodUnit', align: 'center' },
+            { title: '数量', dataIndex: 'goodNum', align: 'center' },
+            { title: '单价', dataIndex: 'goodPrice', align: 'center' },
+            { title: '金额', dataIndex: 'goodAmount', align: 'center' },
+          ]}
+          summary={(pageData) => {
+            let totalGoodNum = 0;
+            let totalPrice = 0;
+            let totalAmount = 0;
+            pageData.forEach((data) => {
+              totalGoodNum += data?.goodNum;
+              totalPrice += data?.goodPrice;
+              totalAmount += data?.goodNum * data?.goodPrice;
+            });
+            return (
+              <Table.Summary.Row>
+                <Table.Summary.Cell index={0} align="center">
+                  总计
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={1} colSpan={4}></Table.Summary.Cell>
+                <Table.Summary.Cell index={2} align="center">
+                  <Text type="success">{totalGoodNum}</Text>
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={3} align="center">
+                  <Text type="warning">{totalPrice}</Text>
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={4} align="center">
+                  <Text type="warning">{totalAmount}</Text>
+                </Table.Summary.Cell>
+              </Table.Summary.Row>
+            );
+          }}
+        />
+      </div>
     </div>
   );
 };
