@@ -120,10 +120,10 @@ export default () => {
           >
             审核设置
           </Button>
-          <Button danger type="primary">
+          {/* <Button danger type="primary">
             修改密码
-          </Button>
-          <Button type="primary" onClick={logout}>
+          </Button> */}
+          <Button type="primary" danger onClick={logout}>
             退出登录
           </Button>
         </Space>

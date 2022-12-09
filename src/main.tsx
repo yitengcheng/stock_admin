@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/reset.css';
 import { ConfigProvider } from 'antd';
-import zhCN from 'antd/locale/zh_CN';
+import locale from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -21,7 +21,7 @@ const validateMessages = {
 
 ReactDOM.render(
   <RecoilRoot>
-    <ConfigProvider locale={zhCN} form={{ validateMessages }} theme={theme}>
+    <ConfigProvider locale={locale} form={{ validateMessages }} theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />

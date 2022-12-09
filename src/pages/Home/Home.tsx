@@ -1,4 +1,4 @@
-import { Button, Calendar, Statistic, Table } from 'antd';
+import { Button, Calendar, Form, Modal, Statistic, Table, Typography } from 'antd';
 import React, { useEffect } from 'react';
 import styles from './index.module.less';
 import { PlusOutlined } from '@ant-design/icons';
@@ -9,12 +9,21 @@ import apis from '../../apis';
 import { useNavigate } from 'react-router-dom';
 import * as echarts from 'echarts';
 import lodash from 'lodash';
+import FormInput from '../../component/form/FormInput';
+import FormTextArea from '../../component/form/FormTextArea';
+import FormDatePicker from '../../component/form/FormDatePicker';
+import dayjs from 'dayjs';
+
+const { Title } = Typography;
 
 export default () => {
   const navigator = useNavigate();
   const [numberTotal, setNumberTotal] = useStateRef({});
   const [warringGoods, setWarringGoods] = useStateRef({});
   const [tableData, setTableData] = useStateRef([]);
+  const [matterForm] = Form.useForm();
+  const [currentDate, setCurrentDate] = useStateRef(dayjs());
+  const [matterList, setMatterList] = useStateRef([]);
 
   const stateAnimation = {
     duration: 300,
@@ -25,10 +34,16 @@ export default () => {
     setNumberTotal(await post(apis.stockStatisticalNumber));
     initWarringGoodsEcharts();
     initTableData();
+    matterForm.setFieldValue('recordTime', dayjs());
   }, []);
 
+  useEffect(() => {
+    initMattersList();
+  }, [currentDate]);
+
   const selectDay = (date) => {
-    console.log(date.format('YYYY-MM-DD'));
+    setCurrentDate(date);
+    matterForm.setFieldValue('recordTime', date);
   };
   const initWarringGoodsEcharts = () => {
     post(apis.stockWarringStatistical).then((res) => {
@@ -93,6 +108,30 @@ export default () => {
         result.push({ key: item._id ?? randomKey(), ...item });
       });
       setTableData(result);
+    });
+  };
+  const modalMatters = () => {
+    Modal.confirm({
+      title: '添加事项',
+      content: (
+        <Form form={matterForm}>
+          <FormDatePicker name="recordTime" label="日期" required={false} />
+          <FormTextArea label="内容" name="content" required={false} />
+        </Form>
+      ),
+      onOk: () => {
+        matterForm.validateFields().then((res) => {
+          post(apis.addMatters, res).then(() => {
+            matterForm.setFieldValue('content', '');
+            initMattersList();
+          });
+        });
+      },
+    });
+  };
+  const initMattersList = () => {
+    post(apis.mattersList, { recordTime: currentDate }).then((res) => {
+      setMatterList(res);
     });
   };
 
@@ -243,10 +282,28 @@ export default () => {
         </div>
         <div className={styles.scheduleTitle}>
           <div className={styles.scheduleTitleText}>今日事项</div>
-          <Button size="small" type="primary" shape="circle" icon={<PlusOutlined style={{ color: '#fff' }} />} />
+          <Button
+            size="small"
+            type="primary"
+            shape="circle"
+            icon={<PlusOutlined style={{ color: '#fff' }} />}
+            onClick={() => {
+              modalMatters();
+            }}
+          />
         </div>
         <div className={styles.scheduleList}>
           <div>事项列表</div>
+          {matterList.map((matter) => (
+            <Title
+              key={matter?._id}
+              style={{ marginTop: '0.5vh' }}
+              level={3}
+              type={matter?.type === 1 ? 'success' : 'warning'}
+            >
+              {matter?.content}
+            </Title>
+          ))}
         </div>
       </div>
     </div>

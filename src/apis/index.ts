@@ -10,6 +10,7 @@ import godownEntry from './godownEntry';
 import outboundOrder from './outboundOrder';
 import auditUser from './auditUser';
 import statistical from './statistical';
+import matters from './matters';
 
 export default {
   ...user,
@@ -24,4 +25,5 @@ export default {
   ...godownEntry,
   ...auditUser,
   ...statistical,
+  ...matters,
 };
