@@ -154,7 +154,7 @@ export default () => {
             selectedKeys={[currentKeyRef.current]}
             onClick={clickMenu}
             style={{ width: '55vw', paddingLeft: '50px' }}
-            items={userInfo?.type === 1 ? menus : commonMenus}
+            items={userInfo?.type === 2 ? commonMenus : menus}
           />
           <div className={styles.headerRight_box}>
             {/* <Badge count={5}>

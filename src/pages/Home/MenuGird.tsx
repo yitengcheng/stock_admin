@@ -2,20 +2,30 @@ import React from 'react';
 import { randomKey } from '../../utils';
 import styles from './index.module.less';
 import { useNavigate } from 'react-router-dom';
+import outbound from '../../assets/images/outbound.png';
+import outboundRegister from '../../assets/images/outboundRegister.png';
+import option from '../../assets/images/option.png';
+import analyze from '../../assets/images/analyze.png';
+import itemClassify from '../../assets/images/itemClassify.png';
+import supplier from '../../assets/images/supplier.png';
+import recipient from '../../assets/images/recipient.png';
+import putinStorage from '../../assets/images/putinStorage.png';
+import list from '../../assets/images/list.png';
+import quota from '../../assets/images/quota.png';
 
 export default () => {
   const navigator = useNavigate();
   const menus = [
-    { color: '#E2EBFC', icon: '/src/assets/images/outbound.png', title: '出库单', path: 'outboundOrder' },
-    { color: '#E6F7E9', icon: '/src/assets/images/outboundRegister.png', title: '出库登记' },
-    { color: '#E2EBFC', icon: '/src/assets/images/option.png', title: '部门管理', path: 'departmentManagement' },
-    { color: '#FFF5E6', icon: '/src/assets/images/analyze.png', title: '统计报表' },
-    { color: '#DFF8FB', icon: '/src/assets/images/itemClassify.png', title: '选项设置', path: 'option' },
-    { color: '#E6F7E9', icon: '/src/assets/images/supplier.png', title: '供应商', path: 'supplier' },
-    { color: '#FFECEC', icon: '/src/assets/images/recipient.png', title: '员工管理', path: 'employee' },
-    { color: '#E2EBFC', icon: '/src/assets/images/putinStorage.png', title: '入库单', path: 'godownEntry' },
-    { color: '#E2EBFC', icon: '/src/assets/images/list.png', title: '库存查询', path: 'inventory' },
-    { color: '#E6F7E9', icon: '/src/assets/images/quota.png', title: '部门定额', path: 'branchQuota' },
+    { color: '#E2EBFC', icon: outbound, title: '出库单', path: 'outboundOrder' },
+    { color: '#E6F7E9', icon: outboundRegister, title: '出库登记' },
+    { color: '#E2EBFC', icon: option, title: '部门管理', path: 'departmentManagement' },
+    { color: '#FFF5E6', icon: analyze, title: '统计报表' },
+    { color: '#DFF8FB', icon: itemClassify, title: '选项设置', path: 'option' },
+    { color: '#E6F7E9', icon: supplier, title: '供应商', path: 'supplier' },
+    { color: '#FFECEC', icon: recipient, title: '员工管理', path: 'employee' },
+    { color: '#E2EBFC', icon: putinStorage, title: '入库单', path: 'godownEntry' },
+    { color: '#E2EBFC', icon: list, title: '库存查询', path: 'inventory' },
+    { color: '#E6F7E9', icon: quota, title: '部门定额', path: 'branchQuota' },
   ];
   const pageJump = (path) => {
     navigator(path);

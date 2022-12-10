@@ -13,6 +13,11 @@ import FormTextArea from '../../component/form/FormTextArea';
 import FormDatePicker from '../../component/form/FormDatePicker';
 import dayjs from 'dayjs';
 import { getStorage } from '../../localStorage';
+import locale from 'antd/es/date-picker/locale/zh_CN';
+import 'dayjs/locale/zh-cn';
+import queryStock from '../../assets/images/queryStock.png';
+import workOrder from '../../assets/images/workOrder.png';
+import putInStorageImage from '../../assets/images/putInStorageImage.png';
 
 const { Title } = Typography;
 
@@ -171,7 +176,7 @@ export default () => {
                     </span>
                     <span>件</span>
                   </div>
-                  <img src="/src/assets/images/queryStock.png" className={styles.statisticalImage} />
+                  <img src={queryStock} className={styles.statisticalImage} />
                 </div>
               </div>
               <div
@@ -196,7 +201,7 @@ export default () => {
                     </span>
                     <span>件</span>
                   </div>
-                  <img src="/src/assets/images/workOrder.png" className={styles.statisticalImage} />
+                  <img src={workOrder} className={styles.statisticalImage} />
                 </div>
               </div>
               <div
@@ -220,7 +225,7 @@ export default () => {
                     </span>
                     <span>件</span>
                   </div>
-                  <img src="/src/assets/images/putInStorageImage.png" className={styles.statisticalImage} />
+                  <img src={putInStorageImage} className={styles.statisticalImage} />
                 </div>
               </div>
             </div>
@@ -279,7 +284,7 @@ export default () => {
           <div className={styles.boxTitleText}>日历</div>
         </div>
         <div>
-          <Calendar fullscreen={false} onSelect={selectDay} />
+          <Calendar locale={locale} fullscreen={false} onSelect={selectDay} />
         </div>
         <div className={styles.scheduleTitle}>
           <div className={styles.scheduleTitleText}>今日事项</div>
