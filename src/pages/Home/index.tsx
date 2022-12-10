@@ -3,7 +3,7 @@ import useStateRef from 'react-usestateref';
 import styles from './index.module.less';
 import { Layout, Menu, Avatar, Spin, Badge, Breadcrumb, notification, Space, Button } from 'antd';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { routers, menus } from '../../routers';
+import { routers, menus, commonMenus } from '../../routers';
 import { getStorage, removeStorage } from '../../localStorage';
 import { useRecoilState } from 'recoil';
 import { isLoading } from '../../recoil/atom';
@@ -154,7 +154,7 @@ export default () => {
             selectedKeys={[currentKeyRef.current]}
             onClick={clickMenu}
             style={{ width: '55vw', paddingLeft: '50px' }}
-            items={menus}
+            items={userInfo?.type === 1 ? menus : commonMenus}
           />
           <div className={styles.headerRight_box}>
             {/* <Badge count={5}>

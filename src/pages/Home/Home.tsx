@@ -13,6 +13,7 @@ import FormInput from '../../component/form/FormInput';
 import FormTextArea from '../../component/form/FormTextArea';
 import FormDatePicker from '../../component/form/FormDatePicker';
 import dayjs from 'dayjs';
+import { getStorage } from '../../localStorage';
 
 const { Title } = Typography;
 
@@ -24,6 +25,7 @@ export default () => {
   const [matterForm] = Form.useForm();
   const [currentDate, setCurrentDate] = useStateRef(dayjs());
   const [matterList, setMatterList] = useStateRef([]);
+  const userInfo = getStorage('userInfo');
 
   const stateAnimation = {
     duration: 300,
@@ -35,6 +37,7 @@ export default () => {
     initWarringGoodsEcharts();
     initTableData();
     matterForm.setFieldValue('recordTime', dayjs());
+    userInfo?.type === 2 && navigator('applyForGoods', { replace: true });
   }, []);
 
   useEffect(() => {

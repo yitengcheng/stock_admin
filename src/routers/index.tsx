@@ -180,3 +180,28 @@ export const menus = [
     ],
   },
 ];
+
+export const commonMenus = [
+  {
+    label: '工作台',
+    path: '',
+    key: 'item-0',
+  },
+
+  {
+    label: '物品申领',
+    key: 'item-3',
+    children: [
+      {
+        label: '物品申领',
+        key: 'item-3-1',
+        path: 'applyForGoods',
+      },
+      {
+        label: '申领历史',
+        key: 'item-3-2',
+        path: 'applyForGoodsHistory',
+      },
+    ],
+  },
+];
