@@ -1,16 +1,14 @@
 import { Form } from 'antd';
 import React from 'react';
-import useStateRef from 'react-usestateref';
 import FormInput from '../../component/form/FormInput';
 import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import { formCol } from '../../utils';
 import styles from './index.module.less';
 import FormSwitch from '../../component/form/FormSwitch';
 import DepartmentOption from '../../component/leftCommon/DepartmentOption';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')} style={{ flexDirection: 'row' }}>

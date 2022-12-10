@@ -14,7 +14,7 @@ export default (props: any) => {
     try {
       const res = await post(apis.options, { type: 4 });
       let tmp = [{ title: '物品分类', key: 1, children: [] }];
-      res.map((item, index) => {
+      res.map((item) => {
         tmp[0].children.push({ title: item.name, key: item._id });
       });
       setData(tmp);

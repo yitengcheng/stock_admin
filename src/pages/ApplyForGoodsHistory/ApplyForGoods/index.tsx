@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import useStateRef from 'react-usestateref';
 import MyTable from '../../component/columnTable/MyTable';
 import { showOption } from '../../utils';
-import styles from './index.module.less';
 import lodash from 'lodash';
 import MyModal from '../../component/common/MyModal';
 import OutboundOrderDetail from '../../component/popupComponent/OutboundOrderDetail';
@@ -16,7 +15,7 @@ import OutboundOrderLook from '../../component/popupComponent/OutboundOrderLook'
 import AuditStatusLook from '../../component/popupComponent/AuditStatusLook';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
-export default (props: any) => {
+export default () => {
   const modalRef = useRef(0);
   const tableRef = useRef(0);
   const lookModalRef = useRef(0);
@@ -29,24 +28,24 @@ export default (props: any) => {
     Modal.error({
       content: '确认是否取消物品申领',
       onOk: () => {
-        post(apis.cancelOutboundOrder, { id }).then((result) => {
+        post(apis.cancelOutboundOrder, { id }).then(() => {
           tableRef.current.refresh();
         });
       },
     });
   };
-  const checkOrder = (id) => {
-    Modal.confirm({
-      title: '是否同意该申请单',
-      icon: <ExclamationCircleFilled />,
-      onOk() {
-        post(apis.checkOutboundOrder, { id, auditStatus: 2 });
-      },
-      onCancel() {
-        post(apis.checkOutboundOrder, { id, auditStatus: 3 });
-      },
-    });
-  };
+  // const checkOrder = (id) => {
+  //   Modal.confirm({
+  //     title: '是否同意该申请单',
+  //     icon: <ExclamationCircleFilled />,
+  //     onOk() {
+  //       post(apis.checkOutboundOrder, { id, auditStatus: 2 });
+  //     },
+  //     onCancel() {
+  //       post(apis.checkOutboundOrder, { id, auditStatus: 3 });
+  //     },
+  //   });
+  // };
 
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')}>

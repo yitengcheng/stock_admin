@@ -1,18 +1,16 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Descriptions, Form, Input, Row, Space, Typography } from 'antd';
+import { Button, Form, Row, Space } from 'antd';
 import dayjs from 'dayjs';
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import apis from '../../apis';
 import { post } from '../../axios';
 import { initSupplierOption, initStorageTypeOption, initEmployeeOption, initGoodOption } from '../../utils/initOption';
-import EditTable from '../EditTable';
 import FormDatePicker from '../form/FormDatePicker';
 import FormInput from '../form/FormInput';
 import FormSelect from '../form/FormSelect';
 import FormSwitch from '../form/FormSwitch';
 import FormTextArea from '../form/FormTextArea';
-import lodash from 'lodash';
 
 export default (props: any) => {
   const { closeModal, refresh } = props;
@@ -44,7 +42,7 @@ export default (props: any) => {
     <Form form={godownEntryForm}>
       <Row>
         <Space size="large">
-          <FormInput label="单据编号" name="orderNo" disabled={true} />
+          <FormInput label="单据编号" name="orderNo" disabled />
           <FormDatePicker label="入库时间" name="storageTime" />
           <FormSelect label="入库类型" name="storageType" options={storageTypeOption} />
           <FormSelect
@@ -89,9 +87,9 @@ export default (props: any) => {
                         onChangeGood(value);
                       }}
                     />
-                    <FormInput required={false} label="规格" name={[field.name, 'models']} disabled={true} />
-                    <FormInput required={false} label="单位" name={[field.name, 'unit']} disabled={true} />
-                    <FormInput required={false} label="单价" name={[field.name, 'price']} disabled={true} />
+                    <FormInput required={false} label="规格" name={[field.name, 'models']} disabled />
+                    <FormInput required={false} label="单位" name={[field.name, 'unit']} disabled />
+                    <FormInput required={false} label="单价" name={[field.name, 'price']} disabled />
                     <FormInput label="数量" name={[field.name, 'goodNum']} />
                     <Form.Item>
                       <MinusCircleOutlined

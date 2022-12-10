@@ -6,7 +6,6 @@ import FormInput from '../../component/form/FormInput';
 import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import styles from './index.module.less';
 import MyModal from '../../component/common/MyModal';
 import OutboundOrderDetail from '../../component/popupComponent/OutboundOrderDetail';
 import apis from '../../apis';
@@ -18,7 +17,7 @@ import { OUTBOUNDORDER_TYPE } from '../../constant';
 import { post } from '../../axios';
 import OutboundOrderLook from '../../component/popupComponent/OutboundOrderLook';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const modalRef = useRef(0);
   const tableRef = useRef(0);
@@ -46,7 +45,7 @@ export default (props: any) => {
     Modal.error({
       content: '确认是否作废此出库单',
       onOk: () => {
-        post(apis.invalidOutboundOrder, { id }).then((result) => {
+        post(apis.invalidOutboundOrder, { id }).then(() => {
           tableRef.current.refresh();
         });
       },

@@ -1,17 +1,11 @@
 import { Table, Typography } from 'antd';
 import React from 'react';
-import useStateRef from 'react-usestateref';
-import FormDateRangePicker from '../../component/form/FormDateRangePicker';
-import FormInput from '../../component/form/FormInput';
-import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
-import TableScreen from '../../component/columnTable/TableScreen';
-import styles from './index.module.less';
 import apis from '../../apis';
 
 const { Text } = Typography;
 
-export default (props: any) => {
+export default () => {
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')}>
       <MyTable
@@ -48,7 +42,7 @@ export default (props: any) => {
               <Table.Summary.Cell index={0} align="center">
                 总计
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={1} colSpan={4}></Table.Summary.Cell>
+              <Table.Summary.Cell index={1} colSpan={4} />
               <Table.Summary.Cell index={2} align="center">
                 <Text type="success">{totalPrice}</Text>
               </Table.Summary.Cell>
@@ -61,7 +55,7 @@ export default (props: any) => {
               <Table.Summary.Cell index={4} align="center">
                 <Text>{totalMin}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={3} align="center"></Table.Summary.Cell>
+              <Table.Summary.Cell index={3} align="center" />
             </Table.Summary.Row>
           );
         }}

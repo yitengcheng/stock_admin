@@ -33,7 +33,7 @@ export default () => {
     Modal.confirm({
       content: '确认是否删除员工',
       onOk: () => {
-        post(apis.delEmployee, { ids }).then((result) => {
+        post(apis.delEmployee, { ids }).then(() => {
           tableRef.current.refresh();
         });
       },

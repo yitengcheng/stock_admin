@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import styles from './index.module.less';
-import { Layout, Menu, Avatar, Spin, Badge, Breadcrumb, notification, Space, Button } from 'antd';
+import { Layout, Menu, Spin, Breadcrumb, notification, Space, Button } from 'antd';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { routers, menus, commonMenus } from '../../routers';
 import { getStorage, removeStorage } from '../../localStorage';
@@ -10,7 +10,7 @@ import { isLoading } from '../../recoil/atom';
 import { DEFAULT_APPNAME } from '../../constant';
 import { post } from '../../axios';
 import apis from '../../apis';
-import { BellOutlined, DownOutlined } from '@ant-design/icons';
+import { DownOutlined } from '@ant-design/icons';
 import lodash from 'lodash';
 
 export default () => {
@@ -72,41 +72,41 @@ export default () => {
       <Link to={''}>工作台</Link>
     </Breadcrumb.Item>,
   ].concat(extraBreadcrumbItems);
-  const openNotification = () => {
-    const messageList = [
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: false },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: false },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-      { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
-    ];
-    notification.open({
-      message: '消息中心',
-      description: (
-        <div className={styles.messageCenterBox}>
-          {messageList.map((data) => (
-            <div className={styles.messageBox}>
-              <img src={data.hasUnread ? '/src/assets/images/unread.png' : '/src/assets/images/read.png'} />
-              <div className={data.hasUnread ? styles.messageUnreadText : styles.messageReadText}>{data.message}</div>
-              <div className={styles.messageDate}>{data.date}</div>
-            </div>
-          ))}
-        </div>
-      ),
-      placement: 'topRight',
-      duration: 0,
-      style: {
-        width: '30vw',
-        height: '30vh',
-      },
-    });
-  };
+  // const openNotification = () => {
+  //   const messageList = [
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: false },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: false },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //     { message: '关于贵阳观山湖区治安管理办法xxxxx', date: '2022-11-08', hasUnread: true },
+  //   ];
+  //   notification.open({
+  //     message: '消息中心',
+  //     description: (
+  //       <div className={styles.messageCenterBox}>
+  //         {messageList.map((data) => (
+  //           <div className={styles.messageBox}>
+  //             <img src={data.hasUnread ? '/src/assets/images/unread.png' : '/src/assets/images/read.png'} />
+  //             <div className={data.hasUnread ? styles.messageUnreadText : styles.messageReadText}>{data.message}</div>
+  //             <div className={styles.messageDate}>{data.date}</div>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     ),
+  //     placement: 'topRight',
+  //     duration: 0,
+  //     style: {
+  //       width: '30vw',
+  //       height: '30vh',
+  //     },
+  //   });
+  // };
   const openUserOption = () => {
     notification.open({
       message: '设置',

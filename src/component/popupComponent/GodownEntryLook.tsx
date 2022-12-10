@@ -4,12 +4,11 @@ import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import apis from '../../apis';
 import { post } from '../../axios';
-import lodash from 'lodash';
 import { showOption } from '../../utils';
 import { GODOWNENTRY_TYPE } from '../../constant';
 
 export default (props: any) => {
-  const { closeModal, id } = props;
+  const { id } = props;
   const [godownEntry, setGodownEntry] = useStateRef([]);
 
   useEffect(async () => {

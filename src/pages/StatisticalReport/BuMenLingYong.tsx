@@ -5,16 +5,13 @@ import FormDateRangePicker from '../../component/form/FormDateRangePicker';
 import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import { formCol } from '../../utils';
-import styles from './index.module.less';
 import { initDepartment } from '../../utils/initOption';
 import apis from '../../apis';
-import lodash from 'lodash';
 import dayjs from 'dayjs';
 
 const { Text } = Typography;
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const [departmentOption, setDepartmentOption] = useStateRef([]);
   const [params, setParams] = useStateRef({});
@@ -92,14 +89,14 @@ export default (props: any) => {
               <Table.Summary.Cell index={0} align="center">
                 总计
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={1} colSpan={4}></Table.Summary.Cell>
+              <Table.Summary.Cell index={1} colSpan={4} />
               <Table.Summary.Cell index={2} align="center">
                 <Text type="success">{totalGoodNum}</Text>
               </Table.Summary.Cell>
               <Table.Summary.Cell index={3} align="center">
                 <Text type="warning">{totalPrice}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={3} colSpan={2}></Table.Summary.Cell>
+              <Table.Summary.Cell index={3} colSpan={2} />
             </Table.Summary.Row>
           );
         }}

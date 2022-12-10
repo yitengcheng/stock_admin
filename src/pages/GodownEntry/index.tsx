@@ -6,7 +6,6 @@ import FormInput from '../../component/form/FormInput';
 import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import styles from './index.module.less';
 import MyModal from '../../component/common/MyModal';
 import GodownEntryDetail from '../../component/popupComponent/GodownEntryDetail';
 import apis from '../../apis';
@@ -18,14 +17,14 @@ import { post } from '../../axios';
 import GodownEntryLook from '../../component/popupComponent/GodownEntryLook';
 import { initEmployeeOption, initStorageTypeOption, initSupplierOption } from '../../utils/initOption';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const tableRef = useRef(0);
   const modalRef = useRef(0);
   const detailModalRef = useRef(0);
   const [godownEntry, setGodownEntry, godownEntryRef] = useStateRef({});
   const [godownEntryId, setGodownEntryId, godownEntryIdRef] = useStateRef({});
-  const [params, setParams, paramsRef] = useStateRef({});
+  const [params, setParams] = useStateRef({});
   const [storageTypeOption, setStorageTypeOption] = useStateRef([]);
   const [supplierOption, setSupplierOption] = useStateRef([]);
   const [employeeOption, setEmployeeOption] = useStateRef([]);
@@ -40,7 +39,7 @@ export default (props: any) => {
     Modal.error({
       content: '确认是否作废此入库单',
       onOk: () => {
-        post(apis.invalidGodownEntry, { id }).then((result) => {
+        post(apis.invalidGodownEntry, { id }).then(() => {
           tableRef.current.refresh();
         });
       },

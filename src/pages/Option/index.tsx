@@ -1,10 +1,8 @@
 import { Button, Form, Modal, Space } from 'antd';
 import React, { useRef } from 'react';
 import useStateRef from 'react-usestateref';
-import FormInput from '../../component/form/FormInput';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import styles from './index.module.less';
 import apis from '../../apis';
 import MyModal from '../../component/common/MyModal';
 import OptionDetail from '../../component/popupComponent/OptionDetail';
@@ -13,7 +11,7 @@ import FormSelect from '../../component/form/FormSelect';
 import { OPTION_TYPE } from '../../constant';
 import { showOption } from '../../utils';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const modalRef = useRef(0);
   const tableRef = useRef(0);
@@ -29,7 +27,7 @@ export default (props: any) => {
     Modal.confirm({
       content: '确认是否删除此选项',
       onOk: () => {
-        post(apis.delOption, { ids }).then((result) => {
+        post(apis.delOption, { ids }).then(() => {
           tableRef.current.refresh();
         });
       },

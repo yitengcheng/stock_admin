@@ -9,7 +9,6 @@ import apis from '../../apis';
 import { useNavigate } from 'react-router-dom';
 import * as echarts from 'echarts';
 import lodash from 'lodash';
-import FormInput from '../../component/form/FormInput';
 import FormTextArea from '../../component/form/FormTextArea';
 import FormDatePicker from '../../component/form/FormDatePicker';
 import dayjs from 'dayjs';
@@ -20,7 +19,6 @@ const { Title } = Typography;
 export default () => {
   const navigator = useNavigate();
   const [numberTotal, setNumberTotal] = useStateRef({});
-  const [warringGoods, setWarringGoods] = useStateRef({});
   const [tableData, setTableData] = useStateRef([]);
   const [matterForm] = Form.useForm();
   const [currentDate, setCurrentDate] = useStateRef(dayjs());

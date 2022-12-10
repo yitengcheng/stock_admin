@@ -7,7 +7,6 @@ import FormRadioGroup from '../../component/form/FormRadioGroup';
 import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import styles from './index.module.less';
 import lodash from 'lodash';
 import dayjs from 'dayjs';
 import {
@@ -21,7 +20,7 @@ import apis from '../../apis';
 import { showOption } from '../../utils';
 import { GODOWNENTRY_TYPE, OUTBOUNDORDER_TYPE } from '../../constant';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const [itemType, setItemType] = useStateRef('');
   const [storageTypeOption, setStorageTypeOption] = useStateRef([]);

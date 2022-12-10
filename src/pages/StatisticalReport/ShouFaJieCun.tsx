@@ -2,19 +2,14 @@ import { Button, Form, Table, Typography } from 'antd';
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
-import FormInput from '../../component/form/FormInput';
-import FormSelect from '../../component/form/FormSelect';
-import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
 import styles from './index.module.less';
 import apis from '../../apis';
 import { post } from '../../axios';
-import dayjs from 'dayjs';
-import lodash from 'lodash';
 
 const { Text } = Typography;
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const [tableData, setTableData] = useStateRef([]);
   const [params, setParams] = useStateRef({});
@@ -126,7 +121,7 @@ export default (props: any) => {
                 <Table.Summary.Cell index={0} align="center">
                   总计
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={1} colSpan={3}></Table.Summary.Cell>
+                <Table.Summary.Cell index={1} colSpan={3} />
                 <Table.Summary.Cell index={2} align="center">
                   <Text type="success">{totalStartNumber}</Text>
                 </Table.Summary.Cell>

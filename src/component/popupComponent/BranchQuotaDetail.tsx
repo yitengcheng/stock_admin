@@ -6,7 +6,6 @@ import { post } from '../../axios';
 import { initDepartment, initGoodOption } from '../../utils/initOption';
 import FormInput from '../form/FormInput';
 import FormSelect from '../form/FormSelect';
-import FormTextArea from '../form/FormTextArea';
 
 export default (props: any) => {
   const { closeModal, refresh, branchQuta } = props;

@@ -1,18 +1,16 @@
 import { Button, Form, Modal, Space } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import useStateRef from 'react-usestateref';
-import FormInput from '../../component/form/FormInput';
 import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import styles from './index.module.less';
 import apis from '../../apis';
 import { initDepartment, initGoodOption } from '../../utils/initOption';
 import MyModal from '../../component/common/MyModal';
 import BranchQuotaDetail from '../../component/popupComponent/BranchQuotaDetail';
 import { post } from '../../axios';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const [departmentOption, setDepartmentOption] = useStateRef([]);
   const [goodOption, setGoodOption] = useStateRef([]);
@@ -30,7 +28,7 @@ export default (props: any) => {
     Modal.confirm({
       content: '确认是否删除此部门定额',
       onOk: () => {
-        post(apis.delBranchQutas, { ids }).then((result) => {
+        post(apis.delBranchQutas, { ids }).then(() => {
           tableRef.current.refresh();
         });
       },

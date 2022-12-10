@@ -8,7 +8,7 @@ import { randomKey } from '../../utils';
 import { initEmployeeOption } from '../../utils/initOption';
 import styles from './index.module.less';
 
-export default (props: any) => {
+export default () => {
   const [current, setCurrent] = useStateRef(0);
   const [stepsList, setStepsList] = useStateRef([{ title: '审核人1', key: randomKey() }]);
   const [employeeOption, setEmployeeOption] = useStateRef([]);

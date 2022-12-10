@@ -4,7 +4,7 @@ import styles from './index.module.less';
 import FormRadioGroup from '../../component/form/FormRadioGroup';
 import FormDatePicker from '../../component/form/FormDatePicker';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   return (
     <div className={['baseContainer', 'baseBorder'].join(' ')}>

@@ -1,14 +1,12 @@
 import { Form } from 'antd';
 import React from 'react';
-import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
 import FormInput from '../../component/form/FormInput';
 import FormSelect from '../../component/form/FormSelect';
 import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
-import styles from './index.module.less';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')}>

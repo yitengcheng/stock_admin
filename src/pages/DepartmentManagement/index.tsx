@@ -9,7 +9,7 @@ import MyModal from '../../component/common/MyModal';
 import DepartDetail from '../../component/popupComponent/DepartDetail';
 import DelDepartDetail from '../../component/popupComponent/DelDepartDetail';
 
-export default (props: any) => {
+export default () => {
   const [parentId, setParentId, currentParentIdRef] = useStateRef('');
   const [departmentName, setDepartmentName, currentDepartmentNameRef] = useStateRef('');
   const [departmentId, setDepartmentId, currentDepartmentIdRef] = useStateRef('');

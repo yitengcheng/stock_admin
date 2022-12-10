@@ -3,10 +3,8 @@ import React, { useRef } from 'react';
 import useStateRef from 'react-usestateref';
 import MyTable from '../../component/columnTable/MyTable';
 import { showOption } from '../../utils';
-import styles from './index.module.less';
 import lodash from 'lodash';
 import MyModal from '../../component/common/MyModal';
-import OutboundOrderDetail from '../../component/popupComponent/OutboundOrderDetail';
 import apis from '../../apis';
 import { getStorage } from '../../localStorage';
 import { OUTBOUNDORDER_TYPE } from '../../constant';
@@ -16,13 +14,10 @@ import OutboundOrderLook from '../../component/popupComponent/OutboundOrderLook'
 import AuditStatusLook from '../../component/popupComponent/AuditStatusLook';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
-export default (props: any) => {
-  const modalRef = useRef(0);
+export default () => {
   const tableRef = useRef(0);
   const lookModalRef = useRef(0);
   const lookStatusModalRef = useRef(0);
-  const [outboundOrder, setOutboundOrder, outboundOrderRef] = useStateRef({});
-  const userInfo = getStorage('userInfo');
   const [outboundOrderId, setOutboundOrderId] = useStateRef('');
 
   const checkOrder = (id) => {

@@ -14,13 +14,13 @@ import apis from '../../apis';
 import { post } from '../../axios';
 import { initUnitOption } from '../../utils/initOption';
 
-export default (props: any) => {
+export default () => {
   const [screenForm] = Form.useForm();
   const tableRef = useRef(0);
   const modalRef = useRef(0);
   const [classification, setClassification] = useStateRef();
   const [good, setGood, goodRef] = useStateRef({});
-  const [searchParams, setSearchParams, searchParamsRef] = useStateRef({});
+  const [searchParams, setSearchParams] = useStateRef({});
   const [unitOption, setUnitOption] = useStateRef([]);
 
   useEffect(async () => {
@@ -38,7 +38,7 @@ export default (props: any) => {
     Modal.confirm({
       content: '确认是否删除物品',
       onOk: () => {
-        post(apis.delGoods, { ids }).then((result) => {
+        post(apis.delGoods, { ids }).then(() => {
           tableRef.current.refresh();
         });
       },

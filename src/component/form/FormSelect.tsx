@@ -1,8 +1,5 @@
 import { Form, Select } from 'antd';
 import React from 'react';
-import useStateRef from 'react-usestateref';
-import { randomKey } from '../../utils';
-const { Option } = Select;
 
 export default (props: any) => {
   /**
