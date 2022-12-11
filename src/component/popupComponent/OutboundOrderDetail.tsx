@@ -50,15 +50,12 @@ export default (props: any) => {
     });
   };
   const initFormData = () => {
-    if (!outboundOrder) {
-      outboundOrderForm.setFieldValue('orderNo', `CK${dayjs().format('YYYYMMDDHHmmss')}`);
-    }
     let goodIds = [];
-    outboundOrderForm.setFieldValue('orderNo', outboundOrder.orderNo);
-    outboundOrderForm.setFieldValue('outboundTime', outboundOrder.outboundTime);
-    outboundOrderForm.setFieldValue('outboundType', outboundOrder.outboundType);
-    outboundOrderForm.setFieldValue('receiveUser', outboundOrder.receiveUser?._id);
-    outboundOrderForm.setFieldValue('remark', outboundOrder.remark);
+    outboundOrderForm.setFieldValue('orderNo', outboundOrder?.orderNo ?? `CK${dayjs().format('YYYYMMDDHHmmss')}`);
+    outboundOrderForm.setFieldValue('outboundTime', outboundOrder?.outboundTime);
+    outboundOrderForm.setFieldValue('outboundType', outboundOrder?.outboundType);
+    outboundOrderForm.setFieldValue('receiveUser', outboundOrder?.receiveUser?._id);
+    outboundOrderForm.setFieldValue('remark', outboundOrder.?remark);
     outboundOrder?.outboundItems.map((item) => {
       const { goodId, goodNum } = item;
       goodIds.push({
