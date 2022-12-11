@@ -38,7 +38,7 @@ export default () => {
         </Form>
       </TableScreen>
       <MyTable
-        url={apis.supplierTable}
+        url={apis.godownSupplierTable}
         params={params}
         columns={[
           {

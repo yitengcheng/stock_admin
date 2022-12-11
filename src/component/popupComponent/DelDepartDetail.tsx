@@ -19,7 +19,6 @@ export default (props: any) => {
     departForm.validateFields().then((values) => {
       post(apis.delDepartment, values).then(() => {
         departForm.resetFields();
-        initDepartOption();
         refresh && refresh();
         closeModal && closeModal();
       });
