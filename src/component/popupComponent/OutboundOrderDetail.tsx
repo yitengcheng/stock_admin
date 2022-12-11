@@ -55,7 +55,7 @@ export default (props: any) => {
     outboundOrderForm.setFieldValue('outboundTime', outboundOrder?.outboundTime);
     outboundOrderForm.setFieldValue('outboundType', outboundOrder?.outboundType);
     outboundOrderForm.setFieldValue('receiveUser', outboundOrder?.receiveUser?._id);
-    outboundOrderForm.setFieldValue('remark', outboundOrder.?remark);
+    outboundOrderForm.setFieldValue('remark', outboundOrder?.remark);
     outboundOrder?.outboundItems.map((item) => {
       const { goodId, goodNum } = item;
       goodIds.push({
