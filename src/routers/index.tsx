@@ -84,18 +84,19 @@ export const menus = [
   {
     label: '部门定额',
     key: 'item-2',
-    children: [
-      {
-        label: '部门定额',
-        key: 'item-2-1',
-        path: 'branchQuota',
-      },
-      {
-        label: '领用分析',
-        key: 'item-2-2',
-        path: 'applicationAnalysis',
-      },
-    ],
+    path: 'branchQuota',
+    // children: [
+    //   {
+    //     label: '部门定额',
+    //     key: 'item-2-1',
+    //     path: 'branchQuota',
+    //   },
+    //   {
+    //     label: '领用分析',
+    //     key: 'item-2-2',
+    //     path: 'applicationAnalysis',
+    //   },
+    // ],
   },
   {
     label: '物品申领',
