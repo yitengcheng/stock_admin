@@ -12,6 +12,7 @@ import { routers } from './routers';
 import { RecoilRoot } from 'recoil';
 import '@/assets/css/reset.css';
 import { theme } from './assets/theme/theme';
+import 'babel-polyfill';
 
 dayjs.locale('zh-cn');
 

@@ -12,7 +12,7 @@ import MyModal from '../../component/common/MyModal';
 import GoodDetail from '../../component/popupComponent/GoodDetail';
 import apis from '../../apis';
 import { post } from '../../axios';
-import { initUnitOption } from '../../utils/initOption';
+import { initSupplierOption, initUnitOption } from '../../utils/initOption';
 
 export default () => {
   const [screenForm] = Form.useForm();
@@ -22,9 +22,11 @@ export default () => {
   const [good, setGood, goodRef] = useStateRef({});
   const [searchParams, setSearchParams] = useStateRef({});
   const [unitOption, setUnitOption] = useStateRef([]);
+  const [suppliersOption, setSuppliersOption] = useStateRef([]);
 
   useEffect(async () => {
     setUnitOption(await initUnitOption());
+    setSuppliersOption(await initSupplierOption());
   }, []);
 
   const selectGoodClassify = (id) => {
@@ -58,6 +60,7 @@ export default () => {
           <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>
             <FormInput label="关键字" required={false} name="keyword" />
             <FormSelect label="单位" required={false} name="unit" options={unitOption} />
+            <FormSelect label="供应商" required={false} name="supplierId" options={suppliersOption} />
             <FormSwitch label="包含零件库" required={false} name="zero" options={['不包含', '包含']} />
             <Button type="primary" onClick={search}>
               查询

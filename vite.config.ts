@@ -1,10 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import legacyPlugin from '@vitejs/plugin-legacy';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    legacyPlugin({
+      targets: ['> 1%, last 1 version, ie >= 11'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'], // 面向IE11时需要此插件
+    }),
+  ],
   base: './', // 打包路径
   resolve: {
     alias: {
