@@ -38,15 +38,8 @@ export default () => {
   };
   const initGetWeather = async () => {
     try {
-      let _script = document.createElement('script');
-      _script.setAttribute('charset', 'utf-8');
-      _script.setAttribute('type', 'text/javascript');
-      _script.setAttribute('src', 'https://pv.sohu.com/cityjson?ie=utf-8');
-      document.getElementsByTagName('head')[0].appendChild(_script);
-      _script.onload = async () => {
-        const res = await post(apis.getWeather, { ip: returnCitySN['cip'] });
-        setWeather(res || {});
-      };
+      const res = await post(apis.getWeather);
+      setWeather(res || {});
     } catch (error) {
       console.log(error);
     }
@@ -144,9 +137,9 @@ export default () => {
             <div>{DEFAULT_APPNAME}</div>
           </div>
           <div className={styles.weather_box}>
-            <div style={{ fontSize: '160%' }}>{weather.temperature}℃</div>
-            <div style={{ fontSize: '120%' }}>{weather.weather}</div>
-            <div style={{ fontSize: '120%' }}>{weather.city}</div>
+            {weather?.temperature && <div style={{ fontSize: '160%' }}>{weather?.temperature}℃</div>}
+            <div style={{ fontSize: '120%' }}>{weather?.weather}</div>
+            <div style={{ fontSize: '120%' }}>{weather?.city}</div>
           </div>
           <Menu
             mode="horizontal"

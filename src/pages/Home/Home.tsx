@@ -260,9 +260,7 @@ export default () => {
                     },
                     { title: '单价', dataIndex: 'price', align: 'center' },
                     { title: '库存数量', dataIndex: 'inventoryNumber', align: 'center' },
-                    { title: '库存数量', dataIndex: 'inventoryNumber', align: 'center' },
                     { title: '库存上限', dataIndex: 'inventoryMax', align: 'center' },
-                    { title: '库存数量', dataIndex: 'inventoryNumber', align: 'center' },
                     { title: '库存下限', dataIndex: 'inventoryMin', align: 'center' },
                   ]}
                 />
