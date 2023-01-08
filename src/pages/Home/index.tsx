@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import styles from './index.module.less';
-import { Layout, Menu, Spin, Breadcrumb, notification, Space, Button } from 'antd';
+import { Layout, Menu, Spin, Breadcrumb, notification, Space, Button, Dropdown } from 'antd';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { routers, menus, commonMenus } from '../../routers';
 import { getStorage, removeStorage } from '../../localStorage';
@@ -100,34 +100,39 @@ export default () => {
   //     },
   //   });
   // };
-  const openUserOption = () => {
-    notification.open({
-      message: '设置',
-      description: (
-        <Space direction="vertical" align="center">
-          <Button
-            type="primary"
-            onClick={() => {
-              navigator('auditSetup');
-            }}
-          >
-            审核设置
-          </Button>
-          {/* <Button danger type="primary">
-            修改密码
-          </Button> */}
-          <Button type="primary" danger onClick={logout}>
-            退出登录
-          </Button>
-        </Space>
+  const adminItems = [
+    {
+      key: '1',
+      label: (
+        <Button
+          type="primary"
+          onClick={() => {
+            navigator('auditSetup');
+          }}
+        >
+          审核设置
+        </Button>
       ),
-      style: {
-        width: '9vw',
-        display: 'flex',
-        justifyContent: 'center',
-      },
-    });
-  };
+    },
+    {
+      key: '2',
+      label: (
+        <Button type="primary" danger onClick={logout}>
+          退出登录
+        </Button>
+      ),
+    },
+  ];
+  const generalItems = [
+    {
+      key: '1',
+      label: (
+        <Button type="primary" danger onClick={logout}>
+          退出登录
+        </Button>
+      ),
+    },
+  ];
 
   return (
     <Spin spinning={loading} tip="加载中。。。">
@@ -155,8 +160,14 @@ export default () => {
             </Badge>
             <div style={{ height: '30%', width: '1px', backgroundColor: '#CFCFCF' }} /> */}
             <div className={styles.userInfo_box}>
-              <p style={{ color: '#3D3D3D' }}>{userInfo.name || '暂无'}</p>
-              <DownOutlined style={{ color: '#999999' }} onClick={() => openUserOption()} />
+              <Dropdown menu={userInfo?.type === 2 ? { items: generalItems } : { items: adminItems }}>
+                <Space>
+                  <p style={{ color: '#3D3D3D', fontSize: '140%', fontFamily: 'SourceHanSansCN-Bold' }}>
+                    {userInfo.name || '暂无'}
+                  </p>
+                  <DownOutlined style={{ color: '#999999' }} />
+                </Space>
+              </Dropdown>
             </div>
           </div>
         </Header>

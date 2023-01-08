@@ -87,10 +87,7 @@ export default (props: any) => {
           )}
         </Space>
       </Row>
-      <FormTextArea label="备注" name="remark" required={false} />
-      {mode !== 2 && (
-        <FormSwitch label="同步到明细" name="hasSynchronous" required={false} options={['同步', '不同步']} />
-      )}
+
       <Form.List name="goodIds">
         {(fields, { add, remove }) => (
           <>
@@ -147,6 +144,10 @@ export default (props: any) => {
           </>
         )}
       </Form.List>
+      <FormTextArea label="备注" name="remark" required={false} />
+      {mode !== 2 && (
+        <FormSwitch label="同步到明细" name="hasSynchronous" required={false} options={['同步', '不同步']} />
+      )}
       <Space>
         <Button
           type="primary"
