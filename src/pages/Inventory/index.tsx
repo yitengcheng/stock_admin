@@ -54,8 +54,8 @@ export default () => {
 
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')} style={{ flexDirection: 'row' }}>
-      <ItemClassifyOption onClick={selectGoodClassify} />
-      <div className={styles.mainContainer}>
+      <ItemClassifyOption onClick={selectGoodClassify} url={apis.options} />
+      <div className="mainContainer">
         <TableScreen label="物品清单">
           <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>
             <FormInput label="关键字" required={false} name="keyword" />

@@ -48,7 +48,7 @@ export default () => {
   // };
 
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <MyTable
         ref={tableRef}
         onAddBtn={() => {
@@ -61,7 +61,6 @@ export default () => {
         url={apis.outboundOrderTable}
         addBtnText="申领物品"
         name="物品申领列表"
-        width={2200}
         columns={[
           { title: '出库单号', dataIndex: 'orderNo', width: 100 },
           {

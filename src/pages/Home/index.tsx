@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useStateRef from 'react-usestateref';
 import styles from './index.module.less';
 import { Layout, Menu, Spin, Breadcrumb, notification, Space, Button, Dropdown } from 'antd';
@@ -12,6 +12,8 @@ import { post } from '../../axios';
 import apis from '../../apis';
 import { DownOutlined } from '@ant-design/icons';
 import lodash from 'lodash';
+import MyModal from '../../component/common/MyModal';
+import Password from '../../component/popupComponent/Password';
 
 export default () => {
   const { Header, Content } = Layout;
@@ -20,6 +22,7 @@ export default () => {
   const userInfo = getStorage('userInfo');
   const [loading] = useRecoilState(isLoading);
   const [weather, setWeather] = useStateRef({});
+  const modalRef = useRef();
   useEffect(() => {
     navigator('');
     initGetWeather();
@@ -115,6 +118,19 @@ export default () => {
       ),
     },
     {
+      key: '3',
+      label: (
+        <Button
+          type="primary"
+          onClick={() => {
+            modalRef.current.openModal();
+          }}
+        >
+          修改密码
+        </Button>
+      ),
+    },
+    {
       key: '2',
       label: (
         <Button type="primary" danger onClick={logout}>
@@ -124,6 +140,19 @@ export default () => {
     },
   ];
   const generalItems = [
+    {
+      key: '3',
+      label: (
+        <Button
+          type="primary"
+          onClick={() => {
+            modalRef.current.openModal();
+          }}
+        >
+          修改密码
+        </Button>
+      ),
+    },
     {
       key: '1',
       label: (
@@ -159,10 +188,25 @@ export default () => {
               <BellOutlined style={{ fontSize: '160%', color: '#0575F3' }} onClick={() => openNotification()} />
             </Badge>
             <div style={{ height: '30%', width: '1px', backgroundColor: '#CFCFCF' }} /> */}
-            <div className={styles.userInfo_box}>
-              <Dropdown menu={userInfo?.type === 2 ? { items: generalItems } : { items: adminItems }}>
+            <div className={styles.userInfo_box} id="userInfoBox">
+              <Dropdown
+                menu={userInfo?.type === 2 ? { items: generalItems } : { items: adminItems }}
+                getPopupContainer={() => document.getElementById('userInfoBox')}
+              >
                 <Space>
-                  <p style={{ color: '#3D3D3D', fontSize: '140%', fontFamily: 'SourceHanSansCN-Bold' }}>
+                  <p
+                    style={{
+                      width: '5vw',
+                      overflow: 'hidden',
+                      textAlign: 'center',
+                      widthSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      color: '#3D3D3D',
+                      fontSize: '130%',
+                      fontFamily: 'SourceHanSansCN-Bold',
+                    }}
+                  >
                     {userInfo.name || '暂无'}
                   </p>
                   <DownOutlined style={{ color: '#999999' }} />
@@ -175,6 +219,13 @@ export default () => {
           <Breadcrumb style={{ marginLeft: '1vw', marginTop: '0.5vh' }}>{breadcrumbItems}</Breadcrumb>
           <Outlet />
         </Content>
+        <MyModal ref={modalRef} title="修改密码" width={800}>
+          <Password
+            closeModal={() => {
+              modalRef.current.closeModal();
+            }}
+          />
+        </MyModal>
       </Layout>
     </Spin>
   );

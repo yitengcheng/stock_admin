@@ -142,7 +142,7 @@ export default () => {
   };
 
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <TableScreen label="出入库查询">
         <Form form={screenForm} scrollToFirstError labelWrap>
           <Row>

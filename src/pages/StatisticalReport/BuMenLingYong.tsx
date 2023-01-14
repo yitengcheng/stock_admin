@@ -27,7 +27,7 @@ export default () => {
   };
 
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <TableScreen label="部门领用汇总表">
         <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>
           <FormDateRangePicker label="日期范围" required={false} name="outboundTime" />

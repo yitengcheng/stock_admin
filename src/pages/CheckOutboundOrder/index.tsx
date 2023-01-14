@@ -38,7 +38,7 @@ export default () => {
   };
 
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <MyTable
         ref={tableRef}
         params={{

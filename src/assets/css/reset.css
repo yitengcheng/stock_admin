@@ -59,3 +59,8 @@ td {
   background-color: #0575f3;
   margin-right: 10px;
 }
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+}

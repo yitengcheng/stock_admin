@@ -53,7 +53,7 @@ export default () => {
   };
 
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <TableScreen label="出库单">
         <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>
           <FormInput label="单据编号" required={false} name="orderNo" />

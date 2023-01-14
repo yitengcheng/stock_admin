@@ -9,7 +9,7 @@ import TableScreen from '../../component/columnTable/TableScreen';
 export default () => {
   const [screenForm] = Form.useForm();
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <TableScreen label="物品出入明细表">
         <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>
           <FormInput label="单据编号" required={false} name="receiptNumber" />

@@ -7,7 +7,7 @@ const { Text } = Typography;
 
 export default () => {
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <MyTable
         name="超限库存预警汇总表"
         url={apis.goodWarringTable}

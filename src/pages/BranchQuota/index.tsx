@@ -62,7 +62,6 @@ export default () => {
           modalRef.current.openModal();
         }}
         params={params}
-        width={2200}
         onDelBtn={(ids) => {
           delBranchQuta(ids);
         }}

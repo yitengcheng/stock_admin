@@ -25,7 +25,7 @@ export default () => {
   };
 
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <TableScreen label="物品分类汇总表">
         <Form form={screenForm} scrollToFirstError layout="inline" labelWrap>
           <FormSelect label="物品分类" required={false} name="classification" options={classificationOption} />

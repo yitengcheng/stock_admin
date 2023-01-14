@@ -40,7 +40,7 @@ export default () => {
     initWarringGoodsEcharts();
     initTableData();
     matterForm.setFieldValue('recordTime', dayjs());
-    userInfo?.type === 2 && navigator('applyForGoods', { replace: true });
+    userInfo?.type === 2 && navigator('goodsRequisition', { replace: true });
   }, []);
 
   useEffect(() => {
@@ -108,12 +108,8 @@ export default () => {
     });
   };
   const initTableData = () => {
-    post(apis.goods).then((res) => {
-      let result = [];
-      res?.map((item) => {
-        result.push({ key: item._id ?? randomKey(), ...item });
-      });
-      setTableData(result);
+    post(apis.goodBalanceTable, {}).then((res) => {
+      setTableData(res?.list);
     });
   };
   const modalMatters = () => {
@@ -232,7 +228,7 @@ export default () => {
             <div className={styles.leftTopRightBottomBox}>
               <div className={styles.businessHandlingTitle}>
                 <div className="decoration" />
-                <div>查询库存</div>
+                <div>库存结存</div>
               </div>
               <div>
                 <Table
@@ -244,24 +240,58 @@ export default () => {
                     y: '10vh',
                   }}
                   columns={[
-                    { title: '物品名称', dataIndex: 'name', align: 'center' },
+                    { title: '物品名称', dataIndex: 'goodName', align: 'center' },
+                    { title: '规格', dataIndex: 'goodModels', align: 'center' },
+                    { title: '单位', dataIndex: 'goodUnit', align: 'center' },
+                    { title: '单价', dataIndex: 'goodPrice', align: 'center' },
                     {
-                      title: '物品分类',
-                      dataIndex: 'classification',
+                      title: '期初库存',
                       align: 'center',
-                      render: (obj) => <span>{obj?.name || '暂无'}</span>,
+                      children: [
+                        { title: '数量', align: 'center', dataIndex: 'startNumber' },
+                        {
+                          title: '金额',
+                          align: 'center',
+                          render: (obj) => <span>{obj?.goodPrice * obj?.startNumber}</span>,
+                        },
+                      ],
                     },
-                    { title: '规格型号', dataIndex: 'models', align: 'center' },
                     {
-                      title: '单位',
-                      dataIndex: 'unit',
+                      title: '本期入库',
                       align: 'center',
-                      render: (obj) => <span>{obj?.name || '暂无'}</span>,
+                      children: [
+                        { title: '数量', align: 'center', dataIndex: 'godownEntryNum' },
+                        {
+                          title: '金额',
+                          align: 'center',
+                          render: (obj) => <span>{obj?.goodPrice * obj?.godownEntryNum}</span>,
+                        },
+                      ],
                     },
-                    { title: '单价', dataIndex: 'price', align: 'center' },
-                    { title: '库存数量', dataIndex: 'inventoryNumber', align: 'center' },
-                    { title: '库存上限', dataIndex: 'inventoryMax', align: 'center' },
-                    { title: '库存下限', dataIndex: 'inventoryMin', align: 'center' },
+                    {
+                      title: '本期出库',
+                      align: 'center',
+                      children: [
+                        { title: '数量', align: 'center', dataIndex: 'outboundNum' },
+                        {
+                          title: '金额',
+                          align: 'center',
+                          render: (obj) => <span>{obj?.goodPrice * obj?.outboundNum}</span>,
+                        },
+                      ],
+                    },
+                    {
+                      title: '期末库存',
+                      align: 'center',
+                      children: [
+                        { title: '数量', align: 'center', dataIndex: 'inventoryNumber' },
+                        {
+                          title: '金额',
+                          align: 'center',
+                          render: (obj) => <span>{obj?.goodPrice * obj?.inventoryNumber}</span>,
+                        },
+                      ],
+                    },
                   ]}
                 />
               </div>
@@ -273,7 +303,7 @@ export default () => {
             <div className="decoration" />
             <div>库存预警趋势</div>
           </div>
-          <div id="warringGoods" style={{ width: '77vw', height: '38vh', margin: '1vh 1vw' }} />
+          <div id="warringGoods" style={{ width: '77vw', height: '34vh', margin: '1vh 1vw' }} />
         </div>
       </div>
       <div className={styles.rightContainer}>

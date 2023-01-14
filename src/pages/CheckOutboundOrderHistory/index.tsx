@@ -19,7 +19,7 @@ export default () => {
   const [outboundOrderId, setOutboundOrderId] = useStateRef('');
 
   return (
-    <div className={['baseContainer', 'baseHeight'].join(' ')}>
+    <div className="mainContainer">
       <MyTable
         ref={tableRef}
         params={{
