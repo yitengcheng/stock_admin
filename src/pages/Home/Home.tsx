@@ -18,6 +18,7 @@ import 'dayjs/locale/zh-cn';
 import queryStock from '../../assets/images/queryStock.png';
 import workOrder from '../../assets/images/workOrder.png';
 import putInStorageImage from '../../assets/images/putInStorageImage.png';
+import empty from '../../assets/images/empty.png';
 
 const { Title } = Typography;
 
@@ -28,6 +29,7 @@ export default () => {
   const [matterForm] = Form.useForm();
   const [currentDate, setCurrentDate] = useStateRef(dayjs());
   const [matterList, setMatterList] = useStateRef([]);
+  const [warringFlag, setWarringFlag] = useStateRef(true);
   const userInfo = getStorage('userInfo');
 
   const stateAnimation = {
@@ -150,7 +152,6 @@ export default () => {
     });
   };
   const warringGoods = (res) => {
-    const myChart = echarts.init(document.getElementById('earlyWarning'));
     const borderRadius = [0, 8, 8, 0];
     const tmp = lodash.sortBy(
       lodash.filter(res, (o) => {
@@ -176,6 +177,11 @@ export default () => {
         },
       });
     });
+    if (inventoryData.length > 0 && lackData.length > 0) {
+      setWarringFlag(false);
+    }
+    const myChart = echarts.init(document.getElementById('earlyWarning'));
+
     myChart.setOption({
       tooltip: {
         trigger: 'axis',
@@ -355,8 +361,11 @@ export default () => {
                 <div className="decoration" />
                 <div>库存预警</div>
               </div>
-              <div id="earlyWarning" style={{ width: '58vw', height: '20vh', margin: '1vh 1vw' }}>
-                {/* <Table
+              {warringFlag ? (
+                <img src={empty} style={{ width: '20vw', height: '20vh' }} />
+              ) : (
+                <div id="earlyWarning" style={{ width: '58vw', height: '20vh', margin: '1vh 1vw' }}>
+                  {/* <Table
                   dataSource={tableData}
                   size="small"
                   bordered
@@ -419,7 +428,8 @@ export default () => {
                     },
                   ]}
                 /> */}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
