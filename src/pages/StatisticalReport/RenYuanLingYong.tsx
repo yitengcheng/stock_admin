@@ -64,11 +64,11 @@ export default () => {
             render: (obj) => <span>{obj?.unit?.name || '暂无'}</span>,
           },
           { title: '数量', dataIndex: 'goodNum' },
-          {
-            title: '金额',
-            dataIndex: 'goodNum',
-            render: (obj, record) => <span>{obj ? obj * record?.goodId?.price : '暂无'}</span>,
-          },
+          // {
+          //   title: '金额',
+          //   dataIndex: 'goodNum',
+          //   render: (obj, record) => <span>{obj ? obj * record?.goodId?.price : '暂无'}</span>,
+          // },
           {
             title: '物品分类',
             dataIndex: 'goodId',
@@ -79,10 +79,10 @@ export default () => {
         ]}
         summary={(pageData) => {
           let totalGoodNum = 0;
-          let totalPrice = 0;
+          // let totalPrice = 0;
           pageData.forEach((data) => {
             totalGoodNum += data?.goodNum;
-            totalPrice += data?.goodNum * data?.goodId?.price;
+            // totalPrice += data?.goodNum * data?.goodId?.price;
           });
           return (
             <Table.Summary.Row>
@@ -93,9 +93,9 @@ export default () => {
               <Table.Summary.Cell index={2} align="center">
                 <Text type="success">{totalGoodNum}</Text>
               </Table.Summary.Cell>
-              <Table.Summary.Cell index={3} align="center">
+              {/* <Table.Summary.Cell index={3} align="center">
                 <Text type="warning">{totalPrice}</Text>
-              </Table.Summary.Cell>
+              </Table.Summary.Cell> */}
               <Table.Summary.Cell index={3} colSpan={2} />
             </Table.Summary.Row>
           );

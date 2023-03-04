@@ -47,17 +47,17 @@ export default () => {
             { title: '物品名称', dataIndex: 'goodName', align: 'center' },
             { title: '规格', dataIndex: 'goodModels', align: 'center' },
             { title: '单位', dataIndex: 'goodUnit', align: 'center' },
-            { title: '单价', dataIndex: 'goodPrice', align: 'center' },
+            // { title: '单价', dataIndex: 'goodPrice', align: 'center' },
             {
               title: '期初库存',
               align: 'center',
               children: [
                 { title: '数量', align: 'center', dataIndex: 'startNumber' },
-                {
-                  title: '金额',
-                  align: 'center',
-                  render: (obj) => <span>{obj?.goodPrice * obj?.startNumber}</span>,
-                },
+                // {
+                //   title: '金额',
+                //   align: 'center',
+                //   render: (obj) => <span>{obj?.goodPrice * obj?.startNumber}</span>,
+                // },
               ],
             },
             {
@@ -65,11 +65,11 @@ export default () => {
               align: 'center',
               children: [
                 { title: '数量', align: 'center', dataIndex: 'godownEntryNum' },
-                {
-                  title: '金额',
-                  align: 'center',
-                  render: (obj) => <span>{obj?.goodPrice * obj?.godownEntryNum}</span>,
-                },
+                // {
+                //   title: '金额',
+                //   align: 'center',
+                //   render: (obj) => <span>{obj?.goodPrice * obj?.godownEntryNum}</span>,
+                // },
               ],
             },
             {
@@ -77,11 +77,11 @@ export default () => {
               align: 'center',
               children: [
                 { title: '数量', align: 'center', dataIndex: 'outboundNum' },
-                {
-                  title: '金额',
-                  align: 'center',
-                  render: (obj) => <span>{obj?.goodPrice * obj?.outboundNum}</span>,
-                },
+                // {
+                //   title: '金额',
+                //   align: 'center',
+                //   render: (obj) => <span>{obj?.goodPrice * obj?.outboundNum}</span>,
+                // },
               ],
             },
             {
@@ -89,11 +89,11 @@ export default () => {
               align: 'center',
               children: [
                 { title: '数量', align: 'center', dataIndex: 'inventoryNumber' },
-                {
-                  title: '金额',
-                  align: 'center',
-                  render: (obj) => <span>{obj?.goodPrice * obj?.inventoryNumber}</span>,
-                },
+                // {
+                //   title: '金额',
+                //   align: 'center',
+                //   render: (obj) => <span>{obj?.goodPrice * obj?.inventoryNumber}</span>,
+                // },
               ],
             },
           ]}
@@ -102,50 +102,50 @@ export default () => {
             let totalGodownEntryNum = 0;
             let totalOutboundNum = 0;
             let totalInventoryNumber = 0;
-            let totalStartPrice = 0;
-            let totalGodownEntryPrice = 0;
-            let totalOutboundPrice = 0;
-            let totalInventoryPrice = 0;
+            // let totalStartPrice = 0;
+            // let totalGodownEntryPrice = 0;
+            // let totalOutboundPrice = 0;
+            // let totalInventoryPrice = 0;
             pageData.forEach((data) => {
               totalStartNumber += data?.startNumber;
-              totalStartPrice += data?.startNumber * data?.goodPrice;
+              // totalStartPrice += data?.startNumber * data?.goodPrice;
               totalGodownEntryNum += data?.godownEntryNum;
-              totalGodownEntryPrice += data?.godownEntryNum * data?.goodPrice;
+              // totalGodownEntryPrice += data?.godownEntryNum * data?.goodPrice;
               totalOutboundNum += data?.outboundNum;
-              totalOutboundPrice += data?.outboundNum * data?.goodPrice;
+              // totalOutboundPrice += data?.outboundNum * data?.goodPrice;
               totalInventoryNumber += data?.inventoryNumber;
-              totalInventoryPrice += data?.inventoryNumber * data?.goodPrice;
+              // totalInventoryPrice += data?.inventoryNumber * data?.goodPrice;
             });
             return (
               <Table.Summary.Row>
                 <Table.Summary.Cell index={0} align="center">
                   总计
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={1} colSpan={3} />
+                <Table.Summary.Cell index={1} colSpan={2} />
                 <Table.Summary.Cell index={2} align="center">
                   <Text type="success">{totalStartNumber}</Text>
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={3} align="center">
+                {/* <Table.Summary.Cell index={3} align="center">
                   <Text type="success">{totalStartPrice}</Text>
-                </Table.Summary.Cell>
-                <Table.Summary.Cell index={4} align="center">
+                </Table.Summary.Cell> */}
+                <Table.Summary.Cell index={3} align="center">
                   <Text type="warning">{totalGodownEntryNum}</Text>
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={5} align="center">
+                {/* <Table.Summary.Cell index={5} align="center">
                   <Text type="warning">{totalGodownEntryPrice}</Text>
-                </Table.Summary.Cell>
-                <Table.Summary.Cell index={6} align="center">
+                </Table.Summary.Cell> */}
+                <Table.Summary.Cell index={4} align="center">
                   <Text type="danger">{totalOutboundNum}</Text>
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={7} align="center">
+                {/* <Table.Summary.Cell index={7} align="center">
                   <Text type="danger">{totalOutboundPrice}</Text>
-                </Table.Summary.Cell>
-                <Table.Summary.Cell index={8} align="center">
+                </Table.Summary.Cell> */}
+                <Table.Summary.Cell index={5} align="center">
                   <Text>{totalInventoryNumber}</Text>
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={9} align="center">
+                {/* <Table.Summary.Cell index={9} align="center">
                   <Text>{totalInventoryPrice}</Text>
-                </Table.Summary.Cell>
+                </Table.Summary.Cell> */}
               </Table.Summary.Row>
             );
           }}

@@ -28,8 +28,8 @@ export default () => {
           { title: '规格' },
           { title: '单位' },
           { title: '数量' },
-          { title: '单价' },
-          { title: '金额' },
+          // { title: '单价' },
+          // { title: '金额' },
           { title: '库存数量' },
           { title: '备注' },
         ]}

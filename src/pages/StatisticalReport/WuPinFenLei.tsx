@@ -46,7 +46,7 @@ export default () => {
           },
           { title: '规格型号', dataIndex: 'models' },
           { title: '单位', dataIndex: 'unit', render: (obj) => <span>{obj?.name || '暂无'}</span> },
-          { title: '单价', dataIndex: 'price', width: 60 },
+          // { title: '单价', dataIndex: 'price', width: 60 },
           { title: '库存数量', dataIndex: 'inventoryNumber', width: 60 },
           { title: '库存上限', dataIndex: 'inventoryMax', width: 60 },
           { title: '库存下限', dataIndex: 'inventoryMin', width: 60 },
@@ -55,12 +55,12 @@ export default () => {
           let totalNumber = 0;
           let totalMax = 0;
           let totalMin = 0;
-          let totalPrice = 0;
+          // let totalPrice = 0;
           pageData.forEach((data) => {
             totalNumber += data?.inventoryNumber;
             totalMax += data?.inventoryMax;
             totalMin += data?.inventoryMin;
-            totalPrice += data?.price;
+            // totalPrice += data?.price;
           });
           return (
             <Table.Summary.Row>
@@ -68,9 +68,9 @@ export default () => {
                 总计
               </Table.Summary.Cell>
               <Table.Summary.Cell index={1} colSpan={4} />
-              <Table.Summary.Cell index={2} align="center">
+              {/* <Table.Summary.Cell index={2} align="center">
                 <Text type="success">{totalPrice}</Text>
-              </Table.Summary.Cell>
+              </Table.Summary.Cell> */}
               <Table.Summary.Cell index={3} align="center">
                 <Text type="warning">{totalNumber}</Text>
               </Table.Summary.Cell>

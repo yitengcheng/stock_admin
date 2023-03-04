@@ -15,7 +15,6 @@ import AuditStatusLook from '../../component/popupComponent/AuditStatusLook';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
 export default () => {
-  const modalRef = useRef(0);
   const tableRef = useRef(0);
   const lookModalRef = useRef(0);
   const lookStatusModalRef = useRef(0);
@@ -26,9 +25,6 @@ export default () => {
     <div className="mainContainer">
       <MyTable
         ref={tableRef}
-        onAddBtn={() => {
-          modalRef.current.openModal();
-        }}
         params={{
           receiveUser: userInfo._id,
           status: { $gte: 4 },
@@ -45,7 +41,7 @@ export default () => {
             render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
           },
           { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
-          { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
+          // { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
           {
             title: '出库类型',
             dataIndex: 'outboundType',

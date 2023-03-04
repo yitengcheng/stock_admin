@@ -24,6 +24,8 @@ export default () => {
     Modal.confirm({
       title: '是否同意该申请单',
       icon: <ExclamationCircleFilled />,
+      okText: '是',
+      cancelText: '否',
       onOk() {
         post(apis.checkOutboundOrder, { id, auditStatus: 2 }).then(() => {
           tableRef.current.refresh();
@@ -55,7 +57,7 @@ export default () => {
             render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
           },
           { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
-          { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
+          // { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
           {
             title: '出库类型',
             dataIndex: 'outboundType',

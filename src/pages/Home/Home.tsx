@@ -51,60 +51,185 @@ export default () => {
     setCurrentDate(date);
     matterForm.setFieldValue('recordTime', date);
   };
+  const inventoryGoods = (res) => {
+    const myChart = echarts.init(document.getElementById('inventory'));
+    const formatUtil = echarts.format;
+    const xAxisData = lodash.map(res, 'name');
+    let data = [];
+    const getLevelOption = () => {
+      return [
+        {
+          itemStyle: {
+            borderColor: '#777',
+            borderWidth: 0,
+            gapWidth: 1,
+          },
+          upperLabel: {
+            show: false,
+          },
+        },
+        {
+          itemStyle: {
+            borderColor: '#f3f3f3',
+            borderWidth: 5,
+            gapWidth: 1,
+          },
+          emphasis: {
+            itemStyle: {
+              borderColor: '#ddd',
+            },
+          },
+        },
+        {
+          colorSaturation: [0.35, 0.5],
+          itemStyle: {
+            borderWidth: 5,
+            gapWidth: 1,
+            borderColorSaturation: 0.6,
+          },
+        },
+      ];
+    };
+    res.map((item) => {
+      let result = lodash.findIndex(data, { name: item?.classification?.name });
+      if (result !== -1) {
+        data[result]['value'] += item?.inventoryNumber;
+        data[result]['children'].push({
+          value: item?.inventoryNumber,
+          name: item?.name,
+          path: `${item?.classification?.name}/${item?.name}`,
+        });
+      } else {
+        data.push({
+          name: item?.classification?.name,
+          path: item?.classification?.name,
+          value: item?.inventoryNumber,
+          children: [
+            {
+              value: item?.inventoryNumber,
+              name: item?.name,
+              path: `${item?.classification?.name}/${item?.name}`,
+            },
+          ],
+        });
+      }
+    });
+    myChart.setOption({
+      label: {
+        show: true,
+        formatter: '{b}',
+      },
+      visibleMin: 300,
+      tooltip: {
+        formatter: (info) => {
+          var value = info.value;
+          var treePathInfo = info.treePathInfo;
+          var treePath = [];
+          for (var i = 1; i < treePathInfo.length; i++) {
+            treePath.push(treePathInfo[i].name);
+          }
+          return [
+            '<div class="tooltip-title">' + formatUtil.encodeHTML(treePath.join('/')) + '</div>',
+            '库存量: ' + formatUtil.addCommas(value),
+          ].join('');
+        },
+      },
+      series: [
+        {
+          name: '库存量',
+          data,
+          type: 'treemap',
+          upperLabel: {
+            show: true,
+            height: 20,
+          },
+          levels: getLevelOption(),
+        },
+      ],
+      stateAnimation,
+    });
+  };
+  const warringGoods = (res) => {
+    const myChart = echarts.init(document.getElementById('earlyWarning'));
+    const borderRadius = [0, 8, 8, 0];
+    const tmp = lodash.sortBy(
+      lodash.filter(res, (o) => {
+        return o.inventoryMin - o.inventoryNumber > 0;
+      }),
+      (o) => {
+        return o.inventoryMin - o.inventoryNumber;
+      },
+    );
+    let yData = lodash.map(lodash.slice(tmp, 0, 5), 'name');
+    let inventoryData = [];
+    lodash.map(lodash.slice(tmp, 0, 5), (item) => {
+      inventoryData.push({
+        value: item.inventoryNumber,
+      });
+    });
+    let lackData = [];
+    lodash.map(lodash.slice(tmp, 0, 5), (item) => {
+      lackData.push({
+        value: item.inventoryMin - item.inventoryNumber,
+        itemStyle: {
+          borderRadius,
+        },
+      });
+    });
+    myChart.setOption({
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
+        formatter: '当前库存：{c0}</br>缺少量：{c1}',
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        top: '3%',
+        containLabel: true,
+      },
+      xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01],
+      },
+      yAxis: {
+        type: 'category',
+        data: yData,
+      },
+      series: [
+        {
+          type: 'bar',
+          data: inventoryData,
+          stack: 'total',
+          label: {
+            show: true,
+          },
+          emphasis: {
+            focus: 'series',
+          },
+        },
+        {
+          type: 'bar',
+          data: lackData,
+          stack: 'total',
+          label: {
+            show: true,
+          },
+          emphasis: {
+            focus: 'series',
+          },
+        },
+      ],
+      stateAnimation,
+    });
+  };
   const initWarringGoodsEcharts = () => {
     post(apis.stockWarringStatistical).then((res) => {
-      const myChart = echarts.init(document.getElementById('warringGoods'));
-      const xAxisData = lodash.map(res, 'name');
-      let data = [];
-      const borderRadius = [8, 8, 0, 0];
-      res.map((item) => {
-        if (item?.inventoryMax && item?.inventoryNumber > item?.inventoryMax) {
-          data.push({
-            value: item?.inventoryNumber,
-            itemStyle: {
-              color: '#00ae1c',
-              borderRadius,
-            },
-          });
-        } else if (item?.inventoryMin && item?.inventoryNumber < item?.inventoryMin) {
-          data.push({
-            value: item?.inventoryNumber,
-            itemStyle: {
-              color: '#ff9502',
-              borderRadius,
-            },
-          });
-        } else {
-          data.push({
-            value: item?.inventoryNumber,
-            itemStyle: {
-              color: '#3662ec',
-              borderRadius,
-            },
-          });
-        }
-      });
-      myChart.setOption({
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-        },
-        yAxis: {
-          type: 'value',
-        },
-        label: {
-          show: true,
-          position: 'top',
-        },
-        series: [
-          {
-            data,
-            type: 'bar',
-            barWidth: '10%',
-          },
-        ],
-        stateAnimation,
-      });
+      inventoryGoods(res);
+      warringGoods(res);
     });
   };
   const initTableData = () => {
@@ -228,16 +353,16 @@ export default () => {
             <div className={styles.leftTopRightBottomBox}>
               <div className={styles.businessHandlingTitle}>
                 <div className="decoration" />
-                <div>库存结存</div>
+                <div>库存预警</div>
               </div>
-              <div>
-                <Table
+              <div id="earlyWarning" style={{ width: '58vw', height: '20vh', margin: '1vh 1vw' }}>
+                {/* <Table
                   dataSource={tableData}
                   size="small"
                   bordered
                   pagination={false}
                   scroll={{
-                    y: '10vh',
+                    y: '15vh',
                   }}
                   columns={[
                     { title: '物品名称', dataIndex: 'goodName', align: 'center' },
@@ -293,7 +418,7 @@ export default () => {
                       ],
                     },
                   ]}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -301,9 +426,9 @@ export default () => {
         <div className={styles.leftBottomBox}>
           <div className={styles.warningTitle}>
             <div className="decoration" />
-            <div>库存预警趋势</div>
+            <div>库存量</div>
           </div>
-          <div id="warringGoods" style={{ width: '77vw', height: '34vh', margin: '1vh 1vw' }} />
+          <div id="inventory" style={{ width: '77vw', height: '36vh', margin: '1vh 1vw' }} />
         </div>
       </div>
       <div className={styles.rightContainer}>

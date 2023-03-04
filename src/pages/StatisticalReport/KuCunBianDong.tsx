@@ -61,17 +61,17 @@ export default () => {
             { title: '规格', dataIndex: 'goodModels', align: 'center' },
             { title: '单位', dataIndex: 'goodUnit', align: 'center' },
             { title: '数量', dataIndex: 'goodNum', align: 'center' },
-            { title: '单价', dataIndex: 'goodPrice', align: 'center' },
-            { title: '金额', dataIndex: 'goodAmount', align: 'center' },
+            // { title: '单价', dataIndex: 'goodPrice', align: 'center' },
+            // { title: '金额', dataIndex: 'goodAmount', align: 'center' },
           ]}
           summary={(pageData) => {
             let totalGoodNum = 0;
-            let totalPrice = 0;
-            let totalAmount = 0;
+            // let totalPrice = 0;
+            // let totalAmount = 0;
             pageData.forEach((data) => {
               totalGoodNum += data?.goodNum;
-              totalPrice += data?.goodPrice;
-              totalAmount += data?.goodNum * data?.goodPrice;
+              // totalPrice += data?.goodPrice;
+              // totalAmount += data?.goodNum * data?.goodPrice;
             });
             return (
               <Table.Summary.Row>
@@ -82,12 +82,12 @@ export default () => {
                 <Table.Summary.Cell index={2} align="center">
                   <Text type="success">{totalGoodNum}</Text>
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={3} align="center">
+                {/* <Table.Summary.Cell index={3} align="center">
                   <Text type="warning">{totalPrice}</Text>
                 </Table.Summary.Cell>
                 <Table.Summary.Cell index={4} align="center">
                   <Text type="warning">{totalAmount}</Text>
-                </Table.Summary.Cell>
+                </Table.Summary.Cell> */}
               </Table.Summary.Row>
             );
           }}

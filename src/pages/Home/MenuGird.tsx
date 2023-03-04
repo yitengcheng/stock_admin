@@ -16,13 +16,12 @@ import quota from '../../assets/images/quota.png';
 export default () => {
   const navigator = useNavigate();
   const menus = [
-    { color: '#E2EBFC', icon: outbound, title: '出库单', path: 'outboundOrder' },
+    { color: '#E2EBFC', icon: outbound, title: '基本资料', path: 'basicData' },
     { color: '#E2EBFC', icon: option, title: '部门管理', path: 'departmentManagement' },
-    { color: '#FFF5E6', icon: analyze, title: '统计报表', path: 'buMenLingYong' },
+    { color: '#FFF5E6', icon: analyze, title: '统计报表', path: 'dataStatistics' },
     { color: '#DFF8FB', icon: itemClassify, title: '选项设置', path: 'option' },
     { color: '#E6F7E9', icon: supplier, title: '供应商', path: 'supplier' },
     { color: '#FFECEC', icon: recipient, title: '员工管理', path: 'employee' },
-    { color: '#E2EBFC', icon: putinStorage, title: '入库单', path: 'godownEntry' },
     { color: '#E2EBFC', icon: list, title: '库存查询', path: 'inventory' },
     { color: '#E6F7E9', icon: quota, title: '部门定额', path: 'branchQuota' },
   ];
