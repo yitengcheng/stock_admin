@@ -5,7 +5,7 @@ import { ConfigProvider } from 'antd';
 import locale from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import Login from '@/pages/Login';
 import Home from '@/pages/Home';
 import { routers } from './routers';
@@ -23,7 +23,7 @@ const validateMessages = {
 ReactDOM.render(
   <RecoilRoot>
     <ConfigProvider locale={locale} form={{ validateMessages }} theme={theme}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />}>
@@ -32,7 +32,7 @@ ReactDOM.render(
             ))}
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </ConfigProvider>
   </RecoilRoot>,
   document.getElementById('root'),
