@@ -82,7 +82,6 @@ export default () => {
                     size="small"
                     type="link"
                     onClick={() => {
-                      delete record.departmentId;
                       delete record.password;
                       setEmployee(record);
                       modalRef.current.openModal();

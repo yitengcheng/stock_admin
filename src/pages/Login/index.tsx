@@ -16,7 +16,7 @@ export default () => {
     loginForm
       .validateFields()
       .then((values) => {
-        post(apis.login, values).then((res) => {
+        post(apis.login, { platform: 'stock', ...values }).then((res) => {
           setStorage('token', res.token);
           setStorage('userInfo', res.userInfo);
           navigate('/home', { replace: true });

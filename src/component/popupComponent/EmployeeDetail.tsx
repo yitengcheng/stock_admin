@@ -18,10 +18,11 @@ export default (props: any) => {
   useEffect(() => {
     employeeForm.setFieldsValue({
       name: employee?.name,
+      account: employee?.account,
       phone: employee?.phone,
       type: employee?.type,
       remark: employee?.remark,
-      departmentId,
+      departmentId: departmentId ?? employee?.departmentId?._id,
     });
   }, [employee, departmentId]);
 
@@ -39,6 +40,7 @@ export default (props: any) => {
     <Form form={employeeForm}>
       <FormSelect label="所属部门" name="departmentId" options={departsOption} />
       <FormInput label="姓名" name="name" />
+      <FormInput label="登录账号" name="account" />
       <FormInput label="联系电话" name="phone" />
       <FormInput label="登录密码" name="password" />
       <FormSelect
