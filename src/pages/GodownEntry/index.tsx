@@ -81,25 +81,24 @@ export default () => {
           setGodownEntryId(id);
           detailModalRef.current.openModal();
         }}
+        width={1800}
         columns={[
-          { title: '入库单号', dataIndex: 'orderNo', width: 80 },
+          { title: '入库单号', dataIndex: 'orderNo' },
           {
             title: '物品名称',
             dataIndex: 'godownEntryIds',
             render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
           },
-          { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
-          { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
+          { title: '数量合计', dataIndex: 'numberTotal' },
+          { title: '金额合计', dataIndex: 'amountTotal' },
           {
             title: '入库类型',
             dataIndex: 'storageType',
-            width: 80,
             render: (obj) => <span>{obj?.name || '暂无'}</span>,
           },
           {
             title: '入库时间',
             dataindex: 'storageTime',
-            width: 80,
             render: (obj) => (
               <span>{obj?.storageTime ? dayjs(obj?.storageTime).format('YYYY年MM月DD日') : '暂无'}</span>
             ),
@@ -107,12 +106,12 @@ export default () => {
           {
             title: '状态',
             dataindex: 'status',
-            width: 80,
             render: (obj) => <span>{obj?.status ? showOption(GODOWNENTRY_TYPE, obj?.status) : '暂无'}</span>,
           },
           { title: '备注', dataIndex: 'remark', width: 160 },
           {
             title: '操作',
+            fixed: 'right',
             render: (text, record) => {
               if (record?.status === 1) {
                 return (

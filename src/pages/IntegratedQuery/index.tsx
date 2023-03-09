@@ -44,24 +44,22 @@ export default () => {
     if (value === 1) {
       setUrl(apis.outboundOrderTable);
       setColumns([
-        { title: '出库单号', dataIndex: 'orderNo', width: 80 },
+        { title: '出库单号', dataIndex: 'orderNo' },
         {
           title: '物品名称',
           dataIndex: 'outboundItems',
           render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
         },
-        { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
-        { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
+        { title: '数量合计', dataIndex: 'numberTotal' },
+        { title: '金额合计', dataIndex: 'amountTotal' },
         {
           title: '出库类型',
           dataIndex: 'outboundType',
-          width: 80,
           render: (obj) => <span>{obj?.name || '暂无'}</span>,
         },
         {
           title: '出库时间',
           dataindex: 'outboundTime',
-          width: 80,
           render: (obj) => (
             <span>{obj?.outboundTime ? dayjs(obj?.outboundTime).format('YYYY年MM月DD日') : '暂无'}</span>
           ),
@@ -69,42 +67,38 @@ export default () => {
         {
           title: '状态',
           dataindex: 'status',
-          width: 80,
           render: (obj) => <span>{obj?.status ? showOption(OUTBOUNDORDER_TYPE, obj?.status) : '暂无'}</span>,
         },
-        { title: '备注', dataIndex: 'remark', width: 160 },
+        { title: '备注', dataIndex: 'remark' },
       ]);
     }
     if (value === 2) {
       setUrl(apis.godownEntryTable);
       setColumns([
-        { title: '入库单号', dataIndex: 'orderNo', width: 80 },
+        { title: '入库单号', dataIndex: 'orderNo' },
         {
           title: '物品名称',
           dataIndex: 'godownEntryIds',
           render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
         },
-        { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
-        { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
+        { title: '数量合计', dataIndex: 'numberTotal' },
+        { title: '金额合计', dataIndex: 'amountTotal' },
         {
           title: '入库类型',
           dataIndex: 'storageType',
-          width: 80,
           render: (obj) => <span>{obj?.name || '暂无'}</span>,
         },
         {
           title: '入库时间',
           dataindex: 'storageTime',
-          width: 80,
           render: (obj) => <span>{obj?.storageTime ? dayjs(obj?.storageTime).format('YYYY年MM月DD日') : '暂无'}</span>,
         },
         {
           title: '状态',
           dataindex: 'status',
-          width: 80,
           render: (obj) => <span>{obj?.status ? showOption(GODOWNENTRY_TYPE, obj?.status) : '暂无'}</span>,
         },
-        { title: '备注', dataIndex: 'remark', width: 160 },
+        { title: '备注', dataIndex: 'remark' },
       ]);
     }
     setItemType(value);
@@ -166,7 +160,7 @@ export default () => {
           )}
         </Form>
       </TableScreen>
-      <MyTable url={urlRef.current} params={params} columns={columns} />
+      <MyTable url={urlRef.current} params={params} columns={columns} width={1800} />
     </div>
   );
 };

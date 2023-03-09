@@ -66,6 +66,7 @@ export default () => {
           delBranchQuta(ids);
         }}
         url={apis.branchQutasTable}
+        width={3000}
         columns={[
           {
             title: '部门',
@@ -77,20 +78,20 @@ export default () => {
             dataIndex: 'goodId',
             render: (obj) => <span>{obj?.name || '暂无'}</span>,
           },
-          { title: '规格', dataIndex: 'goodId', render: (obj) => <span>{obj?.models || '暂无'}</span>, width: 120 },
+          { title: '规格', dataIndex: 'goodId', render: (obj) => <span>{obj?.models || '暂无'}</span> },
           { title: '单位', dataIndex: 'goodId', render: (obj) => <span>{obj?.unit?.name || '暂无'}</span> },
-          { title: '一月', dataIndex: 'jan', width: 80 },
-          { title: '二月', dataIndex: 'feb', width: 80 },
-          { title: '三月', dataIndex: 'mar', width: 80 },
-          { title: '四月', dataIndex: 'apr', width: 80 },
-          { title: '五月', dataIndex: 'may', width: 80 },
-          { title: '六月', dataIndex: 'jun', width: 80 },
-          { title: '七月', dataIndex: 'jul', width: 80 },
-          { title: '八月', dataIndex: 'aug', width: 80 },
-          { title: '九月', dataIndex: 'sep', width: 80 },
-          { title: '十月', dataIndex: 'oct', width: 80 },
-          { title: '十一月', dataIndex: 'nov', width: 80 },
-          { title: '十二月', dataIndex: 'dec', width: 80 },
+          { title: '一月', dataIndex: 'jan' },
+          { title: '二月', dataIndex: 'feb' },
+          { title: '三月', dataIndex: 'mar' },
+          { title: '四月', dataIndex: 'apr' },
+          { title: '五月', dataIndex: 'may' },
+          { title: '六月', dataIndex: 'jun' },
+          { title: '七月', dataIndex: 'jul' },
+          { title: '八月', dataIndex: 'aug' },
+          { title: '九月', dataIndex: 'sep' },
+          { title: '十月', dataIndex: 'oct' },
+          { title: '十一月', dataIndex: 'nov' },
+          { title: '十二月', dataIndex: 'dec' },
           { title: '全年定额合计' },
           {
             title: '操作',

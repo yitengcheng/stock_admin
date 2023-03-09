@@ -42,7 +42,7 @@ export default () => {
     initWarringGoodsEcharts();
     initTableData();
     matterForm.setFieldValue('recordTime', dayjs());
-    userInfo?.type === 2 && navigator('goodsRequisition', { replace: true });
+    userInfo?.type !== 1 && navigator('goodsRequisition', { replace: true });
   }, []);
 
   useEffect(() => {

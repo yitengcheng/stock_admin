@@ -34,18 +34,6 @@ export default () => {
       },
     });
   };
-  // const checkOrder = (id) => {
-  //   Modal.confirm({
-  //     title: '是否同意该申请单',
-  //     icon: <ExclamationCircleFilled />,
-  //     onOk() {
-  //       post(apis.checkOutboundOrder, { id, auditStatus: 2 });
-  //     },
-  //     onCancel() {
-  //       post(apis.checkOutboundOrder, { id, auditStatus: 3 });
-  //     },
-  //   });
-  // };
 
   return (
     <div className="mainContainer">
@@ -58,11 +46,12 @@ export default () => {
           receiveUser: userInfo._id,
           status: { $lt: 4 },
         }}
+        width={2000}
         url={apis.outboundOrderTable}
         addBtnText="申领物品"
         name="物品申领列表"
         columns={[
-          { title: '出库单号', dataIndex: 'orderNo', width: 100 },
+          { title: '出库单号', dataIndex: 'orderNo', width: 120 },
           {
             title: '物品名称',
             dataIndex: 'outboundItems',
@@ -113,15 +102,6 @@ export default () => {
                 >
                   取消申领
                 </Button>
-                {/* <Button
-                  size="small"
-                  type="text"
-                  onClick={() => {
-                    checkOrder(record?.id);
-                  }}
-                >
-                  审核
-                </Button> */}
                 <Button
                   size="small"
                   type="link"

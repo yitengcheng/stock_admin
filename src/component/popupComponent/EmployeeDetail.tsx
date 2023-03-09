@@ -49,6 +49,7 @@ export default (props: any) => {
         options={[
           { label: '管理者', value: 1 },
           { label: '普通员工', value: 2 },
+          { label: '普通审核员', value: 3 },
         ]}
       />
       <FormTextArea label="备注" name="remark" required={false} />

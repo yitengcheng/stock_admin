@@ -181,7 +181,7 @@ export default () => {
             selectedKeys={[currentKeyRef.current]}
             onClick={clickMenu}
             style={{ width: '55vw', paddingLeft: '50px' }}
-            items={userInfo?.type === 2 ? commonMenus : menus}
+            items={userInfo?.type !== 1 ? commonMenus : menus}
           />
           <div className={styles.headerRight_box}>
             {/* <Badge count={5}>
@@ -190,7 +190,7 @@ export default () => {
             <div style={{ height: '30%', width: '1px', backgroundColor: '#CFCFCF' }} /> */}
             <div className={styles.userInfo_box} id="userInfoBox">
               <Dropdown
-                menu={userInfo?.type === 2 ? { items: generalItems } : { items: adminItems }}
+                menu={userInfo?.type !== 1 ? { items: generalItems } : { items: adminItems }}
                 getPopupContainer={() => document.getElementById('userInfoBox')}
               >
                 <Space>

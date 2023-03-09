@@ -77,6 +77,7 @@ export default () => {
           onDelBtn={(ids) => {
             delGoods(ids);
           }}
+          width={2200}
           columns={[
             { title: '物品名称', dataIndex: 'name' },
             {
@@ -87,11 +88,24 @@ export default () => {
             { title: '规格型号', dataIndex: 'models' },
             { title: '单位', dataIndex: 'unit', render: (obj) => <span>{obj?.name || '暂无'}</span> },
             { title: '单价', dataIndex: 'price', width: 60 },
+            { title: '品牌', dataIndex: 'brand', width: 100 },
+            {
+              title: '是否为固定资产',
+              dataindex: 'hasFixed',
+              width: 100,
+              render: (obj) => <span>{obj?.hasFixed ? '是' : '否'}</span>,
+            },
+            {
+              title: '固定资产编码',
+              width: 120,
+              render: (obj) => <span>{obj?.hasFixed ? obj.fixedNumber : '暂无'}</span>,
+            },
             { title: '库存数量', dataIndex: 'inventoryNumber', width: 60 },
             { title: '库存上限', dataIndex: 'inventoryMax', width: 60 },
             { title: '库存下限', dataIndex: 'inventoryMin', width: 60 },
             {
               title: '操作',
+              fixed: 'right',
               render: (text, record) => (
                 <Space>
                   <Button

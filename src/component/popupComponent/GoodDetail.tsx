@@ -51,6 +51,15 @@ export default (props: any) => {
       <FormInput label="规格型号" name="models" />
       <FormSelect label="计量单位" name="unit" options={unitOption} />
       <FormSelect label="物品分类" name="classification" options={classificationOption} />
+      <FormInput label="品牌" name="brand" />
+      <FormSelect
+        label="是否为固定资产"
+        name="hasFixed"
+        options={[
+          { label: '是', value: true },
+          { label: '否', value: false },
+        ]}
+      />
       <FormInput label="单价" name="price" />
       <FormInput label="库存数量" name="inventoryNumber" />
       <FormInput label="库存上限" name="inventoryMax" required={false} />
