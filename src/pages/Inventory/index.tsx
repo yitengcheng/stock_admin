@@ -1,4 +1,4 @@
-import { Button, Form, Modal, Space } from 'antd';
+import { Button, Form, message, Modal, Space } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import useStateRef from 'react-usestateref';
 import FormInput from '../../component/form/FormInput';
@@ -51,6 +51,11 @@ export default () => {
       setSearchParams(values);
     });
   };
+  const downGood = () => {
+    post(apis.downGood, { classification, ...searchParams }).then((res) => {
+      window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+    });
+  };
 
   return (
     <div className={['baseContainer', 'baseHeight'].join(' ')} style={{ flexDirection: 'row' }}>
@@ -71,6 +76,26 @@ export default () => {
           ref={tableRef}
           url={apis.goodTable}
           params={{ classification, ...searchParams }}
+          uploadParam={{
+            url: '/api/upload/insertGoods',
+            text: '批量录入物品',
+            onChange: (info) => {
+              if (info?.file?.response) {
+                const { msg } = info?.file?.response;
+                message.success(msg);
+                tableRef.current.refresh();
+              }
+            },
+          }}
+          buttonList={[
+            { text: '下载物品清单', click: downGood },
+            {
+              text: '下载模板',
+              click: () => {
+                window.open(`https://stock.qiantur.com/zip/物品清单模板.xlsx`, '_blank');
+              },
+            },
+          ]}
           onAddBtn={() => {
             modalRef.current.openModal();
           }}

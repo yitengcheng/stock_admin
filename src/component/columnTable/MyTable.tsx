@@ -1,4 +1,4 @@
-import { Button, message, Space, Table } from 'antd';
+import { Button, message, Space, Table, Upload } from 'antd';
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { post } from '../../axios';
 import { randomKey } from '../../utils';
@@ -20,6 +20,8 @@ const List = (props: any, ref: any) => {
     params,
     keyword,
     summary,
+    buttonList = [],
+    uploadParam,
   } = props;
   const [pageNum, setPageNum] = useState(1);
   const [total, setTotal] = useState(undefined);
@@ -78,6 +80,36 @@ const List = (props: any, ref: any) => {
         </div>
         <div>
           <Space>
+            {uploadParam && (
+              <Upload
+                name="file"
+                headers={{ Authorization: `Bearer ${window.localStorage.getItem('token')}` }}
+                action={uploadParam?.url}
+                maxCount={uploadParam?.maxCount ?? 1}
+                onChange={(info) => {
+                  uploadParam?.onChange && uploadParam?.onChange(info);
+                }}
+                showUploadList={false}
+              >
+                <Button size="small" type="primary">
+                  {uploadParam?.text ?? '上传'}
+                </Button>
+              </Upload>
+            )}
+            {buttonList.length > 0 &&
+              buttonList.map((item) => (
+                <Button
+                  key={randomKey()}
+                  size={item?.size ?? 'small'}
+                  type={item?.type ?? 'primary'}
+                  icon={item?.icon}
+                  onClick={() => {
+                    item?.click && item?.click();
+                  }}
+                >
+                  {item?.text}
+                </Button>
+              ))}
             {onAddBtn && (
               <Button size="small" type="primary" icon={<PlusCircleOutlined />} onClick={() => onAddBtn()}>
                 {addBtnText}

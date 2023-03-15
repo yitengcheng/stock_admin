@@ -32,6 +32,8 @@ export default (props: any) => {
       inventoryMax: good?.inventoryMax,
       inventoryMin: good?.inventoryMin,
       remark: good?.remark,
+      brand: good?.brand,
+      hasFixed: good?.hasFixed,
     });
   }, [good]);
 

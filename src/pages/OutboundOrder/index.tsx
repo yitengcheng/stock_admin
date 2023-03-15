@@ -1,4 +1,4 @@
-import { Button, Form, Modal, Space } from 'antd';
+import { Button, Form, message, Modal, Space } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
@@ -51,6 +51,14 @@ export default () => {
       },
     });
   };
+  const downLoad = () => {
+    post(apis.downOutboundOrderTable, params).then((res) => {
+      window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+    });
+  };
+  const downLoadTemplate = () => {
+    window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+  };
 
   return (
     <div className="mainContainer">
@@ -75,12 +83,32 @@ export default () => {
         ref={tableRef}
         url={apis.outboundOrderTable}
         params={params}
+        uploadParam={{
+          url: '/api/upload/inserOutboundOrder',
+          text: '批量录入出库单',
+          onChange: (info) => {
+            if (info?.file?.response) {
+              const { msg } = info?.file?.response;
+              message.success(msg);
+              tableRef.current.refresh();
+            }
+          },
+        }}
+        buttonList={[
+          { text: '下载出库单', click: downLoad },
+          {
+            text: '下载出库单模板',
+            click: () => {
+              window.open(`https://stock.qiantur.com/zip/出库单模板.xlsx`, '_blank');
+            },
+          },
+        ]}
         onAddBtn={() => {
           setOutboundOrder({});
           setMode(1);
           modalRef.current.openModal();
         }}
-        width={1600}
+        width={1800}
         columns={[
           { title: '出库单号', dataIndex: 'orderNo' },
           {

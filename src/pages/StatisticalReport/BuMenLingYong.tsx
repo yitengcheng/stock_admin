@@ -8,6 +8,7 @@ import TableScreen from '../../component/columnTable/TableScreen';
 import { initDepartment } from '../../utils/initOption';
 import apis from '../../apis';
 import dayjs from 'dayjs';
+import { post } from '../../axios';
 
 const { Text } = Typography;
 
@@ -25,6 +26,11 @@ export default () => {
       setParams(values);
     });
   };
+  const downLoad = () => {
+    post(apis.downAccessTable, params).then((res) => {
+      window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+    });
+  };
 
   return (
     <div className="mainContainer">
@@ -40,6 +46,7 @@ export default () => {
       <MyTable
         url={apis.accessTable}
         params={params}
+        buttonList={[{ text: '下载部门领用汇总表', click: downLoad }]}
         columns={[
           {
             title: '日期',

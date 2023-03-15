@@ -1,4 +1,4 @@
-import { Button, Form, Table, Typography } from 'antd';
+import { Button, Form, Space, Table, Typography } from 'antd';
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
@@ -40,6 +40,21 @@ export default () => {
         </Form>
       </TableScreen>
       <div className={styles.tableContainer}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '1vh' }}>
+          <Space>
+            <Button
+              size={'small'}
+              type={'primary'}
+              onClick={() => {
+                post(apis.downGoodBalanceTable, params).then((res) => {
+                  window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+                });
+              }}
+            >
+              {'下载收发结存汇总表'}
+            </Button>
+          </Space>
+        </div>
         <Table
           dataSource={tableData}
           bordered
@@ -51,50 +66,54 @@ export default () => {
             {
               title: '期初库存',
               align: 'center',
-              children: [
-                { title: '数量', align: 'center', dataIndex: 'startNumber' },
-                // {
-                //   title: '金额',
-                //   align: 'center',
-                //   render: (obj) => <span>{obj?.goodPrice * obj?.startNumber}</span>,
-                // },
-              ],
+              dataIndex: 'startNumber',
+              // children: [
+              //   { title: '数量', align: 'center', dataIndex: 'startNumber' },
+              //   // {
+              //   //   title: '金额',
+              //   //   align: 'center',
+              //   //   render: (obj) => <span>{obj?.goodPrice * obj?.startNumber}</span>,
+              //   // },
+              // ],
             },
             {
               title: '本期入库',
               align: 'center',
-              children: [
-                { title: '数量', align: 'center', dataIndex: 'godownEntryNum' },
-                // {
-                //   title: '金额',
-                //   align: 'center',
-                //   render: (obj) => <span>{obj?.goodPrice * obj?.godownEntryNum}</span>,
-                // },
-              ],
+              dataIndex: 'godownEntryNum',
+              // children: [
+              //   { title: '数量', align: 'center', dataIndex: 'godownEntryNum' },
+              //   // {
+              //   //   title: '金额',
+              //   //   align: 'center',
+              //   //   render: (obj) => <span>{obj?.goodPrice * obj?.godownEntryNum}</span>,
+              //   // },
+              // ],
             },
             {
               title: '本期出库',
               align: 'center',
-              children: [
-                { title: '数量', align: 'center', dataIndex: 'outboundNum' },
-                // {
-                //   title: '金额',
-                //   align: 'center',
-                //   render: (obj) => <span>{obj?.goodPrice * obj?.outboundNum}</span>,
-                // },
-              ],
+              dataIndex: 'outboundNum',
+              // children: [
+              //   { title: '数量', align: 'center', dataIndex: 'outboundNum' },
+              //   // {
+              //   //   title: '金额',
+              //   //   align: 'center',
+              //   //   render: (obj) => <span>{obj?.goodPrice * obj?.outboundNum}</span>,
+              //   // },
+              // ],
             },
             {
               title: '期末库存',
               align: 'center',
-              children: [
-                { title: '数量', align: 'center', dataIndex: 'inventoryNumber' },
-                // {
-                //   title: '金额',
-                //   align: 'center',
-                //   render: (obj) => <span>{obj?.goodPrice * obj?.inventoryNumber}</span>,
-                // },
-              ],
+              dataIndex: 'inventoryNumber',
+              // children: [
+              //   { title: '数量', align: 'center', dataIndex: 'inventoryNumber' },
+              //   // {
+              //   //   title: '金额',
+              //   //   align: 'center',
+              //   //   render: (obj) => <span>{obj?.goodPrice * obj?.inventoryNumber}</span>,
+              //   // },
+              // ],
             },
           ]}
           summary={(pageData) => {

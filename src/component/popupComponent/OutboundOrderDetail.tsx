@@ -51,7 +51,7 @@ export default (props: any) => {
   };
   const initFormData = () => {
     let goodIds = [];
-    outboundOrderForm.setFieldValue('orderNo', outboundOrder?.orderNo ?? `CK${dayjs().format('YYYYMMDDHHmmss')}`);
+    outboundOrderForm.setFieldValue('orderNo', outboundOrder?.orderNo ?? `CK${dayjs().format('YYYYMMDDHHmmssSSS')}`);
     outboundOrderForm.setFieldValue('outboundTime', outboundOrder?.outboundTime);
     outboundOrderForm.setFieldValue('outboundType', outboundOrder?.outboundType);
     outboundOrderForm.setFieldValue('receiveUser', outboundOrder?.receiveUser?._id);

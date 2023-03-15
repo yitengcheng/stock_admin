@@ -2,15 +2,23 @@ import { Table, Typography } from 'antd';
 import React from 'react';
 import MyTable from '../../component/columnTable/MyTable';
 import apis from '../../apis';
+import { post } from '../../axios';
 
 const { Text } = Typography;
 
 export default () => {
+  const downLoad = () => {
+    post(apis.downGoodWarringTable).then((res) => {
+      window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+    });
+  };
+
   return (
     <div className="mainContainer">
       <MyTable
         name="超限库存预警汇总表"
         url={apis.goodWarringTable}
+        buttonList={[{ text: '下载超限库存预警汇总表', click: downLoad }]}
         columns={[
           { title: '物品名称', dataIndex: 'name' },
           {

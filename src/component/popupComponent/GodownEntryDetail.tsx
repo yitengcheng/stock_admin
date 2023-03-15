@@ -26,7 +26,7 @@ export default (props: any) => {
     setEmployeeOption(await initEmployeeOption());
     setGoodsOption(await initGoodOption());
   }, []);
-  godownEntryForm.setFieldValue('orderNo', `RK${dayjs().format('YYYYMMDDHHmmss')}`);
+  godownEntryForm.setFieldValue('orderNo', `RK${dayjs().format('YYYYMMDDHHmmssSSS')}`);
 
   const handleGood = async () => {
     godownEntryForm.validateFields().then((values) => {

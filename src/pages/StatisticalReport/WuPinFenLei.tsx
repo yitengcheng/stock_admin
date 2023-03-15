@@ -6,6 +6,7 @@ import MyTable from '../../component/columnTable/MyTable';
 import TableScreen from '../../component/columnTable/TableScreen';
 import { initClassificationOption } from '../../utils/initOption';
 import apis from '../../apis';
+import { post } from '../../axios';
 
 const { Text } = Typography;
 
@@ -23,6 +24,11 @@ export default () => {
       setParams(values);
     });
   };
+  const downLoad = () => {
+    post(apis.downGood, { params }).then((res) => {
+      window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+    });
+  };
 
   return (
     <div className="mainContainer">
@@ -37,6 +43,7 @@ export default () => {
       <MyTable
         url={apis.goodTable}
         params={params}
+        buttonList={[{ text: '下载物品分类汇总表', click: downLoad }]}
         columns={[
           { title: '物品名称', dataIndex: 'name' },
           {

@@ -1,4 +1,4 @@
-import { Button, Form, Table, Typography } from 'antd';
+import { Button, Form, Space, Table, Typography } from 'antd';
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
 import FormDateRangePicker from '../../component/form/FormDateRangePicker';
@@ -41,6 +41,21 @@ export default () => {
         </Form>
       </TableScreen>
       <div className={styles.tableContainer}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '1vh' }}>
+          <Space>
+            <Button
+              size={'small'}
+              type={'primary'}
+              onClick={() => {
+                post(apis.downGoodChangeTable, params).then((res) => {
+                  window.open(`https://stock.qiantur.com/${res.url}`, '_blank');
+                });
+              }}
+            >
+              {'下载库存变动汇总表'}
+            </Button>
+          </Space>
+        </div>
         <Table
           dataSource={tableData}
           bordered
