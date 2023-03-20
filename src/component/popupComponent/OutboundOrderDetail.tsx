@@ -1,5 +1,5 @@
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Row, Space } from 'antd';
+import { Button, Descriptions, Form, Row, Space } from 'antd';
 import dayjs from 'dayjs';
 import React, { useEffect } from 'react';
 import useStateRef from 'react-usestateref';
@@ -106,40 +106,82 @@ export default (props: any) => {
                 });
               };
               return (
-                <Row key={field.key}>
-                  <Space align="baseline" size="large">
+                <Descriptions title="物品信息" bordered key={field.key} size="small">
+                  <Descriptions.Item label="物品">
                     <FormSelect
-                      label="物品"
+                      placeholder="请选择物品"
                       name={[field.name, 'id']}
                       options={goodsOption}
                       onChange={(value) => {
                         onChangeGood(value);
                       }}
+                      style={{ marginTop: '24px' }}
                       disabled={mode === 3}
                     />
-                    <FormInput required={false} label="规格" name={[field.name, 'models']} disabled />
-                    <FormInput required={false} label="单位" name={[field.name, 'unit']} disabled />
-                    <FormInput required={false} label="单价" name={[field.name, 'price']} disabled />
-                    <FormInput label="数量" name={[field.name, 'goodNum']} disabled={mode === 3} />
-                    {mode !== 3 && (
-                      <Form.Item>
-                        <MinusCircleOutlined
+                  </Descriptions.Item>
+                  <Descriptions.Item label="数量">
+                    <FormInput
+                      placeholder="请输入数量"
+                      name={[field.name, 'goodNum']}
+                      disabled={mode === 3}
+                      style={{ marginTop: '24px' }}
+                    />
+                  </Descriptions.Item>
+                  <Descriptions.Item label="规格">
+                    <FormInput
+                      placeholder="请输入规格"
+                      required={false}
+                      name={[field.name, 'models']}
+                      disabled
+                      style={{ marginTop: '24px' }}
+                    />
+                  </Descriptions.Item>
+                  <Descriptions.Item label="单位">
+                    <FormInput
+                      placeholder="请输入单位"
+                      required={false}
+                      name={[field.name, 'unit']}
+                      disabled
+                      style={{ marginTop: '24px' }}
+                    />
+                  </Descriptions.Item>
+                  <Descriptions.Item label="单价">
+                    <FormInput
+                      placeholder="请输入单价"
+                      required={false}
+                      name={[field.name, 'price']}
+                      disabled
+                      style={{ marginTop: '24px' }}
+                    />
+                  </Descriptions.Item>
+
+                  {mode !== 3 && (
+                    <Descriptions.Item>
+                      <Form.Item style={{ marginTop: '24px' }}>
+                        <Button
+                          type="dashed"
+                          danger
                           onClick={() => {
                             remove(field.name);
                           }}
-                        />
+                          icon={<MinusCircleOutlined />}
+                        >
+                          移除此项物品
+                        </Button>
                       </Form.Item>
-                    )}
-                  </Space>
-                </Row>
+                    </Descriptions.Item>
+                  )}
+                </Descriptions>
               );
             })}
             {mode !== 3 && (
-              <Form.Item>
-                <Button type="dashed" onClick={add} icon={<PlusOutlined />}>
-                  添加物品
-                </Button>
-              </Form.Item>
+              <Descriptions.Item>
+                <Form.Item>
+                  <Button type="dashed" onClick={add} icon={<PlusOutlined />} style={{ marginTop: '1vh' }}>
+                    添加物品
+                  </Button>
+                </Form.Item>
+              </Descriptions.Item>
             )}
           </>
         )}

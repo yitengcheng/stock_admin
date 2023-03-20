@@ -162,7 +162,7 @@ export default () => {
         reset={() => {
           setGodownEntry({});
         }}
-        width={1200}
+        width={1400}
       >
         <GodownEntryDetail
           refresh={() => {
