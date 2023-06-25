@@ -6,17 +6,22 @@ import { OPTION_TYPE } from '../../constant';
 import FormInput from '../form/FormInput';
 import FormSelect from '../form/FormSelect';
 import FormTextArea from '../form/FormTextArea';
+import FormSwitch from '../form/FormSwitch';
+import useStateRef from 'react-usestateref';
 
 export default (props: any) => {
   const { closeModal, refresh, option } = props;
   const [optionForm] = Form.useForm();
+  const [type, setType, typeRef] = useStateRef('');
 
   useEffect(() => {
     optionForm.setFieldsValue({
       name: option?.name,
       type: option?.type,
       remark: option?.remark,
+      hasShare: option?.hasShare,
     });
+    setType(option?.type);
   }, [option]);
 
   const handleSupplier = async () => {
@@ -29,11 +34,23 @@ export default (props: any) => {
     });
   };
 
+  const changeType = (value) => {
+    setType(value);
+  };
+
   return (
     <Form form={optionForm}>
-      <FormSelect label="选项类型" name="type" options={OPTION_TYPE} />
+      <FormSelect
+        label="选项类型"
+        name="type"
+        options={OPTION_TYPE}
+        onChange={(value) => {
+          changeType(value);
+        }}
+      />
       <FormInput label="选项名" name="name" />
       <FormTextArea label="备注" name="remark" required={false} />
+      {typeRef.current === 4 && <FormSwitch label="是否共享" name="hasShare" required={false} />}
       <Space>
         <Button
           type="primary"

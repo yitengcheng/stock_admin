@@ -55,6 +55,7 @@ export default () => {
         columns={[
           { title: '选项类型', dataIndex: 'type', render: (obj) => <span>{showOption(OPTION_TYPE, obj)}</span> },
           { title: '选项名', dataIndex: 'name' },
+          { title: '是否共享', dataIndex: 'hasShare', render: (obj) => <span>{obj ? '是' : '否'}</span> },
           { title: '备注', dataIndex: 'remark' },
           {
             title: '操作',
@@ -87,7 +88,7 @@ export default () => {
       />
       <MyModal
         ref={modalRef}
-        title="供应商"
+        title="选项设置"
         reset={() => {
           setOption({});
         }}
