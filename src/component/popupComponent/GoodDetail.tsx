@@ -7,6 +7,7 @@ import { initClassificationOption, initSupplierOption, initUnitOption } from '..
 import FormInput from '../form/FormInput';
 import FormSelect from '../form/FormSelect';
 import FormTextArea from '../form/FormTextArea';
+import dayjs from 'dayjs';
 
 export default (props: any) => {
   const { closeModal, refresh, good } = props;
@@ -14,6 +15,8 @@ export default (props: any) => {
   const [unitOption, setUnitOption] = useStateRef([]);
   const [classificationOption, setClassificationOption] = useStateRef([]);
   const [supplierOption, setSupplierOption] = useStateRef([]);
+  const [hasFixed, setHasFixed] = useStateRef('');
+  const [fixedNo, setFixedNo] = useStateRef('');
 
   useEffect(async () => {
     setUnitOption(await initUnitOption());
@@ -34,7 +37,10 @@ export default (props: any) => {
       remark: good?.remark,
       brand: good?.brand,
       hasFixed: good?.hasFixed,
+      fixedNumber: good?.fixedNumber,
     });
+    setHasFixed(good?.hasFixed);
+    setFixedNo(good?.fixedNumber);
   }, [good]);
 
   const handleGood = async () => {
@@ -61,7 +67,12 @@ export default (props: any) => {
           { label: '是', value: true },
           { label: '否', value: false },
         ]}
+        onChange={(value) => {
+          setHasFixed(value);
+          goodForm.setFieldValue('fixedNumber', fixedNo ?? `GD${dayjs().format('YYYYMMDDHHmmss')}`);
+        }}
       />
+      {hasFixed && <FormInput label="固定资产编码" name="fixedNumber" required={false} />}
       <FormInput label="单价" name="price" />
       <FormInput label="库存数量" name="inventoryNumber" />
       <FormInput label="库存上限" name="inventoryMax" required={false} />
