@@ -108,7 +108,6 @@ export default () => {
           setMode(1);
           modalRef.current.openModal();
         }}
-        width={1800}
         columns={[
           { title: '出库单号', dataIndex: 'orderNo' },
           {
@@ -138,7 +137,6 @@ export default () => {
           { title: '备注', dataIndex: 'remark' },
           {
             title: '操作',
-            width: 140,
             fixed: 'right',
             render: (text, record) => (
               <Space>

@@ -160,7 +160,7 @@ export default () => {
           )}
         </Form>
       </TableScreen>
-      <MyTable url={urlRef.current} params={params} columns={columns} width={1800} />
+      <MyTable url={urlRef.current} params={params} columns={columns} />
     </div>
   );
 };

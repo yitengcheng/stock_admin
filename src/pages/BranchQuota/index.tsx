@@ -66,7 +66,6 @@ export default () => {
           delBranchQuta(ids);
         }}
         url={apis.branchQutasTable}
-        width={3000}
         columns={[
           {
             title: '部门',
@@ -96,7 +95,6 @@ export default () => {
           {
             title: '操作',
             fixed: 'right',
-            width: 140,
             render: (text, record) => (
               <Space>
                 <Button

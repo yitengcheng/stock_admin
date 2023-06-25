@@ -47,7 +47,7 @@ const List = (props: any, ref: any) => {
         resC?.push({
           width: column?.title.length * 20 + 20,
           align: 'center',
-          ellipsis: true,
+          ellipsis: false,
           ...column,
         });
       });
@@ -131,7 +131,7 @@ const List = (props: any, ref: any) => {
         bordered
         summary={summary}
         pagination={{ total }}
-        scroll={{ y: height ? height - 60 : undefined, scrollToFirstRowOnChange: true, x: width }}
+        // scroll={{ y: height ? height - 60 : undefined, scrollToFirstRowOnChange: true, x: width }}
         onRow={(record) => {
           return {
             onClick: () => {

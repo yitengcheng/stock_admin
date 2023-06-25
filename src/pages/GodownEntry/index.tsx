@@ -106,7 +106,6 @@ export default () => {
           setGodownEntryId(id);
           detailModalRef.current.openModal();
         }}
-        width={1800}
         columns={[
           { title: '入库单号', dataIndex: 'orderNo' },
           {
@@ -133,7 +132,7 @@ export default () => {
             dataindex: 'status',
             render: (obj) => <span>{obj?.status ? showOption(GODOWNENTRY_TYPE, obj?.status) : '暂无'}</span>,
           },
-          { title: '备注', dataIndex: 'remark', width: 160 },
+          { title: '备注', dataIndex: 'remark' },
           {
             title: '操作',
             fixed: 'right',

@@ -54,9 +54,9 @@ export default () => {
           { title: '规格型号', dataIndex: 'models' },
           { title: '单位', dataIndex: 'unit', render: (obj) => <span>{obj?.name || '暂无'}</span> },
           // { title: '单价', dataIndex: 'price', width: 60 },
-          { title: '库存数量', dataIndex: 'inventoryNumber', width: 60 },
-          { title: '库存上限', dataIndex: 'inventoryMax', width: 60 },
-          { title: '库存下限', dataIndex: 'inventoryMin', width: 60 },
+          { title: '库存数量', dataIndex: 'inventoryNumber' },
+          { title: '库存上限', dataIndex: 'inventoryMax' },
+          { title: '库存下限', dataIndex: 'inventoryMin' },
         ]}
         summary={(pageData) => {
           let totalNumber = 0;

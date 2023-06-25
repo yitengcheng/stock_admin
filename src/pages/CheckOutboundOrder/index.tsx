@@ -48,26 +48,23 @@ export default () => {
         }}
         url={apis.checkOutboundOrderTable}
         name="审批列表"
-        width={2200}
         columns={[
-          { title: '出库单号', dataIndex: 'orderNo', width: 100 },
+          { title: '出库单号', dataIndex: 'orderNo' },
           {
             title: '物品名称',
             dataIndex: 'outboundItems',
             render: (obj) => <span>{lodash.map(lodash.map(obj, 'goodId'), 'name').join(',') || '暂无'}</span>,
           },
-          { title: '数量合计', dataIndex: 'numberTotal', width: 80 },
+          { title: '数量合计', dataIndex: 'numberTotal' },
           // { title: '金额合计', dataIndex: 'amountTotal', width: 80 },
           {
             title: '出库类型',
             dataIndex: 'outboundType',
-            width: 80,
             render: (obj) => <span>{obj?.name || '暂无'}</span>,
           },
           {
             title: '出库时间',
             dataindex: 'outboundTime',
-            width: 100,
             render: (obj) => (
               <span>{obj?.outboundTime ? dayjs(obj?.outboundTime).format('YYYY年MM月DD日') : '暂无'}</span>
             ),
@@ -75,19 +72,16 @@ export default () => {
           {
             title: '申领时间',
             dataindex: 'applyTime',
-            width: 100,
             render: (obj) => <span>{obj?.applyTime ? dayjs(obj?.applyTime).format('YYYY年MM月DD日') : '暂无'}</span>,
           },
           {
             title: '状态',
             dataindex: 'status',
-            width: 80,
             render: (obj) => <span>{obj?.status ? showOption(OUTBOUNDORDER_TYPE, obj?.status) : '暂无'}</span>,
           },
-          { title: '备注', dataIndex: 'remark', width: 160 },
+          { title: '备注', dataIndex: 'remark' },
           {
             title: '操作',
-            width: 140,
             fixed: 'right',
             render: (text, record) => (
               <Space size="small">
